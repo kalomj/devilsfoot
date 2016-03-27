@@ -62,6 +62,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\ch1\Firelight.cs" />
+    <Compile Include="Assets\Scripts\gameplay\nodes\Prop.cs" />
     <Compile Include="Assets\Scripts\prologue\PrologueGameManager.cs" />
     <Compile Include="Assets\Scripts\start\StartGameManager.cs" />
   </ItemGroup>

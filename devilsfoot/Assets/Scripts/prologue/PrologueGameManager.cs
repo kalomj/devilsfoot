@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -27,6 +28,8 @@ public class PrologueGameManager : MonoBehaviour {
             exposition.text = expositionList[i];
             yield return new WaitForSeconds(2);
         }
+
+        SceneManager.LoadScene(2);
 
     }
 }
