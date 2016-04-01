@@ -42,7 +42,7 @@ namespace UnityStandardAssets.Utility
             foreach (var system in systems)
             {
                 var emission = system.emission;
-                emission.enabled = false;
+                emission.rate = new ParticleSystem.MinMaxCurve(0f);
             }
             BroadcastMessage("Extinguish", SendMessageOptions.DontRequireReceiver);
 

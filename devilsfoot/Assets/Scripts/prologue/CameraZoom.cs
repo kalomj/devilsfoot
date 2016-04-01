@@ -29,7 +29,6 @@ public class CameraZoom : MonoBehaviour {
         }
 
         Vector3 position = cam.transform.localPosition;
-        Vector3 rot = cam.transform.rotation.eulerAngles;
         if (inc && position.z < max)
         {
             cam.transform.localPosition = new Vector3(position.x, position.y, position.z + rate);
