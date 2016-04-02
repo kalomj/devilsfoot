@@ -1,5 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <script>
+	<prop name="ch1">
+		<state name="first_playthrough">
+			<state_property name="text" pc_name= "Host" value="Oh Dear!" />
+			<state_property name="text" pc_name= "Host" value="The chimnay is blocked from the storm."  />
+			<state_property name="text" pc_name= "Host" value="Here, take this." />
+			<state_property name="text" pc_name= "Host" value="Open the window to clear the air." />
+			<state_property name="text" pc_name= "Poe"  value="Certainly!" />
+			<state_property name="text" pc_name= "Poe"  value="I can hardly breathe." />
+			<state_property name="text" pc_name= "Poe"  value="I shall open the window at once." />
+			<state_property name="text" pc_name= "Host" value="I'll send the servant to the roof to clear the chinmay." hold_ms="3000" />
+			<state_property name="text" pc_name= "Host" value="You Attend to that window!" />
+			<state_property name="text" value="" />
+		</state>
+	</prop>
+	
 	<prop name="necklace">
 		<global_property name="description" value="The dead woman's necklace" />
 		<global_property name="original_owner" value="dead_woman" />
@@ -11,7 +26,7 @@
 		<state name="on_woman">
 			<state_property name = "default" value="true" />
 			<state_property name = "interact_text_1" value="It's too good to pass up." />
-			<state_property_name = "on_interact" value="state_change" target="collected" />
+			<state_property name = "on_interact" value="state_change" target="collected" />
 			<state_property name = "change_state_sound" value="assets\sound\ch1\necklase_rustle.wav" />
 			<state_property name = "sprite" value="assets\graphics\ch1\sprites\necklace.psd" />
 		</state>

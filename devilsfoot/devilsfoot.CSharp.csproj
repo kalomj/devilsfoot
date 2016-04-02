@@ -68,21 +68,25 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\ch1\Ch1SceneManager.cs" />
+    <Compile Include="Assets\Scripts\ch1\Firelight.cs" />
+    <Compile Include="Assets\Scripts\gamemanager\DelayText.cs" />
     <Compile Include="Assets\Scripts\gamemanager\GameManager.cs" />
     <Compile Include="Assets\Scripts\gamemanager\KaloScriptReader.cs" />
     <Compile Include="Assets\Scripts\gamemanager\PropNode.cs" />
+    <Compile Include="Assets\Scripts\gameplay\MySceneManager.cs" />
     <Compile Include="Assets\Scripts\gameplay\props\Prop.cs" />
     <Compile Include="Assets\Scripts\prologue\CameraZoom.cs" />
     <Compile Include="Assets\Scripts\prologue\Lightning.cs" />
     <Compile Include="Assets\Scripts\prologue\PrologueSceneManager.cs" />
+    <Compile Include="Assets\Scripts\prologue\TutorialTextFlash.cs" />
     <Compile Include="Assets\Scripts\start\StartSceneManager.cs" />
     <Compile Include="Assets\Scripts\utility\Singleton.cs" />
-    <Compile Include="Assets\ch1\Firelight.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Fonts\IM Fell English SC\OFL.txt" />
+    <None Include="Assets\KaloScripts\ch1.xml" />
     <None Include="Assets\KaloScripts\prologue.xml" />
-    <None Include="Assets\KaloScripts\script.xml" />
     <None Include="Assets\Sound\New Text Document.txt" />
     <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
     <None Include="Assets\Standard Assets\ParticleSystems\ParticleSystemsGuidelines.txt" />

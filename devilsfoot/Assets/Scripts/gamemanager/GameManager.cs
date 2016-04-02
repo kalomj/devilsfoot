@@ -7,8 +7,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : Singleton<GameManager> {
 
     public bool NoSceneSwitch = true;
-    public TextAsset kaloScript;
-
+    
     public enum Scene {start, prologue, ch1 };
 
     public static GameManager singleton;
@@ -22,9 +21,7 @@ public class GameManager : Singleton<GameManager> {
     //called before start
     void Awake()
     {
-        KaloScriptReader ksr = new KaloScriptReader();
-        ksr.OpenTextAsset(kaloScript);
-        ksr.ReadProps();
+
     }
 
     // Use this for initialization

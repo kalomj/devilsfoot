@@ -4,9 +4,11 @@
 		<global_property name="description" value="Intro during the snowy scene with estate backdrop" />
 
 		<state name="first_playthrough">
-			<state_property name = "text_1" value="It was a dark..." hold_ms="1500" />
-			<state_property name = "text_2" value="...and stormy night" hold_ms="500" />
-			<state_property name = "text_3" value="Again." hold_ms="1000" />
+			<state_property name = "text" value="It was a dark..." />
+			<state_property name = "text" value="...and stormy night" />
+			<state_property name = "text" value="Again." hold_ms="3000" />
+			<state_property name = "text" value="And again." hold_ms="3000" />
+			<state_property name = "text" value="Press any key to continue." hold_ms="1" />
 		</state>
 	</prop>
 </script>

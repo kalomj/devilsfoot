@@ -30,9 +30,16 @@ public class KaloScriptReader {
         {
             if(xmlNode.Name == "prop")
             {
-                PropNode pn = new PropNode();             
+                PropNode pn = new PropNode();  
+                
+                if(xmlNode.Attributes["name"] == null)
+                {
+                    throw new System.Exception("KaloScript has unnamed prop");
+                }
 
-                foreach(XmlNode child in xmlNode.ChildNodes)
+                pn.name = xmlNode.Attributes["name"].Value;
+
+                foreach (XmlNode child in xmlNode.ChildNodes)
                 {
                     switch (child.Name)
                     {
@@ -47,7 +54,6 @@ public class KaloScriptReader {
                             break;
                     }
                 }
-                Debug.Log(pn.gpList[0].name + " " + pn.gpList[0].value);
                 pnList.Add(pn);
             }
         }
@@ -64,7 +70,7 @@ public class KaloScriptReader {
             switch(child.Name)
             {
                 case "state_property":
-                    s.spList.Add(new PropNode.state.state_property(child.Attributes["name"].Value,child.Attributes["value"].Value,child.Attributes["hold_ms"].Value));
+                    s.spList.Add(buildStateProperty(child));
                     break;
                 default:
                     Debug.Log(child.Name + " Not Found In KaloScript");
@@ -77,8 +83,20 @@ public class KaloScriptReader {
         return s;
     }
 
-    public void Close()
+    private PropNode.state.state_property buildStateProperty(XmlNode node)
     {
-        xmlDoc = null;
+        PropNode.state.state_property sp = new PropNode.state.state_property(node.Attributes["name"].Value, node.Attributes["value"].Value);
+
+        if(node.Attributes["hold_ms"] != null)
+        {
+            sp.hold_ms = node.Attributes["hold_ms"].Value;
+        }
+
+        if (node.Attributes["pc_name"] != null)
+        {
+            sp.pc_name = node.Attributes["pc_name"].Value;
+        }
+        return sp;
     }
+
 }

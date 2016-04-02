@@ -82,7 +82,6 @@
     <Compile Include="Assets\Standard Assets\ParticleSystems\Scripts\Hose.cs" />
     <Compile Include="Assets\Standard Assets\ParticleSystems\Scripts\ParticleSystemMultiplier.cs" />
     <Compile Include="Assets\Standard Assets\ParticleSystems\Scripts\SmokeParticles.cs" />
-    <Compile Include="Assets\Standard Assets\ParticleSystems\Scripts\WaterHoseParticles.cs" />
     <Compile Include="Assets\Standard Assets\Utility\ActivateTrigger.cs" />
     <Compile Include="Assets\Standard Assets\Utility\AutoMobileShaderSwitch.cs" />
     <Compile Include="Assets\Standard Assets\Utility\AutoMoveAndRotate.cs" />
@@ -109,8 +108,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Fonts\IM Fell English SC\OFL.txt" />
+    <None Include="Assets\KaloScripts\ch1.xml" />
     <None Include="Assets\KaloScripts\prologue.xml" />
-    <None Include="Assets\KaloScripts\script.xml" />
     <None Include="Assets\Sound\New Text Document.txt" />
     <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
     <None Include="Assets\Standard Assets\ParticleSystems\ParticleSystemsGuidelines.txt" />
