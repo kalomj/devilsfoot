@@ -9,7 +9,7 @@
 			<state_property name="text" pc_name= "Poe"  value="Certainly!" />
 			<state_property name="text" pc_name= "Poe"  value="I can hardly breathe." />
 			<state_property name="text" pc_name= "Poe"  value="I shall open the window at once." />
-			<state_property name="text" pc_name= "Host" value="I'll send the servant to the roof to clear the chinmay." hold_ms="3000" />
+			<state_property name="text" pc_name= "Host" value="I'll send the servant to the roof to clear the chimnay." hold_ms="3000" />
 			<state_property name="text" pc_name= "Host" value="You Attend to that window!" />
 			<state_property name="text" value="" />
 		</state>
