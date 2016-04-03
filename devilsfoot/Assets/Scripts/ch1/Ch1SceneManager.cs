@@ -4,10 +4,12 @@ using System.Collections;
 
 public class Ch1SceneManager : MySceneManager {
 
-    void Awake()
+    protected override void Initialize()
     {
         expositionProp = "ch1";
         expositionPropState = "first_playthrough";
     }
+
+
 
 }

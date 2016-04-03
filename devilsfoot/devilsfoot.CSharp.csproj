@@ -70,12 +70,15 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\ch1\Ch1SceneManager.cs" />
     <Compile Include="Assets\Scripts\ch1\Firelight.cs" />
+    <Compile Include="Assets\Scripts\ch1\LanternProp.cs" />
     <Compile Include="Assets\Scripts\gamemanager\DelayText.cs" />
     <Compile Include="Assets\Scripts\gamemanager\GameManager.cs" />
     <Compile Include="Assets\Scripts\gamemanager\KaloScriptReader.cs" />
-    <Compile Include="Assets\Scripts\gamemanager\PropNode.cs" />
+    <Compile Include="Assets\Scripts\gamemanager\PropConfig.cs" />
     <Compile Include="Assets\Scripts\gameplay\MySceneManager.cs" />
+    <Compile Include="Assets\Scripts\gameplay\props\InteractiveProp.cs" />
     <Compile Include="Assets\Scripts\gameplay\props\Prop.cs" />
+    <Compile Include="Assets\Scripts\gameplay\props\PropTextFade.cs" />
     <Compile Include="Assets\Scripts\prologue\CameraZoom.cs" />
     <Compile Include="Assets\Scripts\prologue\Lightning.cs" />
     <Compile Include="Assets\Scripts\prologue\PrologueSceneManager.cs" />

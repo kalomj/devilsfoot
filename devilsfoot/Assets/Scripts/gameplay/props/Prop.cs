@@ -1,44 +1,61 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
+
+/// <summary>
+/// Prop is an abstract class for all game elements drawn to the screen
+/// 
+/// Contains base class functions to configure object from XML on Start
+/// 
+/// Also contains simple common logic for click recognition
+/// </summary>
 public abstract class Prop : MonoBehaviour {
 
     public List<Prop> reachableProps = new List<Prop>();
 
-    [HideInInspector]
-    public Collider col;
+    public string currentState;
 
-    // Use this for initialization
+    [HideInInspector]
+    public PropConfig propConfig;
+
+
+    protected Collider col;
+
     void Awake()
     {
-        col = GetComponent<Collider>();
-        col.enabled = false;
+        if(GetComponent<Collider>() != null)
+        {
+            col = GetComponent<Collider>();
+            col.enabled = false;
+        }
     }
 
-    // Use this for initialization
-    void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    void Start()
+    {
+        Initialize();
+    }
+
+    protected virtual void Initialize()
+    {
+        Debug.Log(gameObject.name);
+    }
 
     void OnMouseDown()
     {
         Arrive();
     }
 
-    public virtual void Arrive()
+    protected virtual void Arrive()
     {
-
+        SetReachablesProps(true);
     }
 
-    public virtual void Leave()
+    protected virtual void Leave()
     {
-
+        SetReachablesProps(false);
     }
+
+
 
     public void SetReachablesProps(bool set)
     {

@@ -15,24 +15,62 @@ public class MySceneManager : MonoBehaviour {
     List<DelayText> expositionText;
     bool endOfScript = false;
 
+    List<Prop> propList;
+    List<PropConfig> pnList;
+
+    void Awake()
+    {
+        KaloScriptReader ksr = new KaloScriptReader();
+        ksr.OpenTextAsset(kaloScript);
+        pnList = ksr.ReadProps();
+
+        AssignPropConfig();
+
+        Initialize();
+    }
+
+    protected virtual void Initialize()
+    {
+        Debug.Log("Empty scenemanager initialization.");
+    }
+
     void Start()
     {
-        if(playExposition)
+        if (playExposition)
         {
             PlayExposition(expositionProp, expositionPropState);
         }
     }
 
-    protected virtual void PlayExposition(string pnName, string stateName)
+    void AssignPropConfig()
+    {
+        propList= new List<Prop>(FindObjectsOfType<Prop>());
+
+        foreach (Prop prop in propList)
+        {
+            AssignPropConfig(prop);
+        }
+    }
+
+    void AssignPropConfig(Prop prop)
+    {
+        foreach (PropConfig pc in pnList)
+        {
+            if (prop.name == pc.name)
+            {
+                prop.propConfig = pc;
+                return;
+            }
+        }
+        Debug.Log("No prop config entry for " + prop.name);
+    }
+
+    void PlayExposition(string pnName, string stateName)
     {
         endOfScript = false;
         expositionText = null;
 
-        KaloScriptReader ksr = new KaloScriptReader();
-        ksr.OpenTextAsset(kaloScript);
-        List<PropNode> pnList = ksr.ReadProps();
-
-        foreach (PropNode pn in pnList)
+        foreach (PropConfig pn in pnList)
         {
             if (pn.name == pnName)
             {

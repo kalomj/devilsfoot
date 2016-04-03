@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <script>
 	<prop name="ch1">
+		<global_property name="type" value="exposition" />
+		
 		<state name="first_playthrough">
 			<state_property name="text" pc_name= "Host" value="Oh Dear!" />
 			<state_property name="text" pc_name= "Host" value="The chimnay is blocked from the storm."  />
@@ -12,6 +14,23 @@
 			<state_property name="text" pc_name= "Host" value="I'll send the servant to the roof to clear the chimnay." hold_ms="3000" />
 			<state_property name="text" pc_name= "Host" value="You Attend to that window!" />
 			<state_property name="text" value="" />
+		</state>
+	</prop>
+	
+	<prop name="lantern">
+		<global_property name="description" value="Lantern on the mantle" />
+		<global_property name="original_owner" value="FireplaceMantle" />
+		<global_property name="interactive" value="true" />
+		
+		<state name="unlit">
+			<state_property name = "interact_text" value="Let's light this place up." />
+			<state_property name = "interact_text" value="This match should do the trick." />
+			<state_property name = "sprite" value="assets\sprites\ch1\lantern" />
+		</state>
+		
+		<state name="lit">
+			<state_property name = "interact_text" value="Better save the fuel." />
+			<state_property name = "sprite" value="assets\sprites\ch1\lantern" />
 		</state>
 	</prop>
 	

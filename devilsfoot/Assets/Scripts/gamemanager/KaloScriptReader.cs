@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using System.Xml;
 using System.IO;
 
+
+/// <summary>
+/// Read script XML file, construct a list of
+/// PropConfig objects based on the content of the file
+/// </summary>
 public class KaloScriptReader {
 
     XmlDocument xmlDoc;
@@ -17,86 +22,95 @@ public class KaloScriptReader {
         }
     }
 
-    public List<PropNode> ReadProps()
+    public List<PropConfig> ReadProps()
     {
         if(xmlDoc == null)
         {
             throw new System.Exception("Attempt to read null XMLDocument Object");
         }
 
-        List<PropNode> pnList = new List<PropNode>();
+        List<PropConfig> pcList = new List<PropConfig>();
 
-        foreach(XmlNode xmlNode in xmlDoc.DocumentElement.ChildNodes)
+        foreach(XmlNode propNode in xmlDoc.DocumentElement.ChildNodes)
         {
-            if(xmlNode.Name == "prop")
+            if(propNode.Name == "prop")
             {
-                PropNode pn = new PropNode();  
+                PropConfig pc = new PropConfig();  
                 
-                if(xmlNode.Attributes["name"] == null)
+                if(propNode.Attributes["name"] == null)
                 {
                     throw new System.Exception("KaloScript has unnamed prop");
                 }
 
-                pn.name = xmlNode.Attributes["name"].Value;
-
-                foreach (XmlNode child in xmlNode.ChildNodes)
+                pc.name = propNode.Attributes["name"].Value;
+                
+                foreach (XmlNode child in propNode.ChildNodes)
                 {
                     switch (child.Name)
                     {
                         case "global_property":
-                            pn.gpList.Add(new PropNode.global_property(child.Attributes["name"].Value,child.Attributes["value"].Value));
+                            buildGlobalProperty(pc, child);
                             break;
                         case "state":
-                            pn.stateList.Add(buildState(child));
+                            buildState(pc,child);
                             break;
                         default:
                             Debug.Log(child.Name + " Not Found In KaloScript");
                             break;
                     }
                 }
-                pnList.Add(pn);
+                pcList.Add(pc);
             }
         }
 
-        return pnList;
+        return pcList;
     }
 
-    private PropNode.state buildState(XmlNode node)
+    private void buildGlobalProperty(PropConfig pc, XmlNode gpNode)
     {
-        PropNode.state s = new PropNode.state(node.Attributes["name"].Value);
+        Dictionary<string, string> attributeDictionary = new Dictionary<string, string>();
 
-        foreach (XmlNode child in node.ChildNodes)
+        foreach (XmlAttribute attribute in gpNode.Attributes)
         {
-            switch(child.Name)
+            attributeDictionary.Add(attribute.Name, attribute.Value);
+        }
+
+        pc.AddGlobalProperty(gpNode.Attributes["name"].Value, gpNode.Attributes["value"].Value,attributeDictionary);
+    }
+
+    private void buildState(PropConfig pc, XmlNode stateNode)
+    {
+        pc.AddState(stateNode.Attributes["name"].Value);
+
+        foreach (XmlNode statePropertyNode in stateNode.ChildNodes)
+        {
+            switch(statePropertyNode.Name)
             {
                 case "state_property":
-                    s.spList.Add(buildStateProperty(child));
+                    buildStateProperty(pc, stateNode,statePropertyNode);
                     break;
                 default:
-                    Debug.Log(child.Name + " Not Found In KaloScript");
+                    Debug.Log(statePropertyNode.Name + " Not Found In KaloScript");
                     break;
             }
         }
 
-        Debug.Log(s.print());
-
-        return s;
+        return;
     }
 
-    private PropNode.state.state_property buildStateProperty(XmlNode node)
+    private void buildStateProperty(PropConfig pc, XmlNode stateNode, XmlNode statePropertyNode)
     {
-        PropNode.state.state_property sp = new PropNode.state.state_property(node.Attributes["name"].Value, node.Attributes["value"].Value);
 
-        if(node.Attributes["hold_ms"] != null)
+        Dictionary<string, string> attributeDictionary = new Dictionary<string, string>();
+
+        foreach(XmlAttribute attribute in statePropertyNode.Attributes)
         {
-            sp.hold_ms = node.Attributes["hold_ms"].Value;
+            attributeDictionary.Add(attribute.Name, attribute.Value);
         }
 
-        if (node.Attributes["pc_name"] != null)
-        {
-            sp.pc_name = node.Attributes["pc_name"].Value;
-        }
-        return sp;
+        pc.AddStateProperty(stateNode.Attributes["name"].Value, statePropertyNode.Attributes["name"].Value, statePropertyNode.Attributes["value"].Value, attributeDictionary);
+
+        return;
     }
 
 }
