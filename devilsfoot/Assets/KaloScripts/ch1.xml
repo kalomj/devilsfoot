@@ -34,6 +34,16 @@
 		</state>
 	</prop>
 	
+	<prop name="SmokeCollider">
+		<global_property name="description" value="Fire effect" />
+		<global_property name="interactive" value="true" />
+		
+		<state name="burning">
+			<state_property name = "interact_text" value="I'm not going near there." />
+			<state_property name = "interact_text" value="I need to open the window." />
+		</state>
+	</prop>
+	
 	<prop name="necklace">
 		<global_property name="description" value="The dead woman's necklace" />
 		<global_property name="original_owner" value="dead_woman" />

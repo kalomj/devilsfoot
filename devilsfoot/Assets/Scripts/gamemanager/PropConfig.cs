@@ -9,6 +9,8 @@ using System.Collections.Generic;
 /// 
 /// PropConfig pc = new PropConfig();
 /// 
+/// TODO: replace public nested classes (ugly) with proper interface functions
+/// 
 /// </summary>
 public class PropConfig {
     public string name { get; set; }
@@ -209,7 +211,6 @@ public class PropConfig {
 
         return;
     }
-
 
     // The default state is the first state entry in the xml file
     public string DefaultState

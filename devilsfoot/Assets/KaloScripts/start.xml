@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<script>
+	<prop name="start">
+		<global_property name="description" value="Start Scene Script" />
+
+		<state name="topmenu">
+			<state_property name = "text" value="Press any key to start." hold_ms="1" />
+		</state>
+	</prop>
+</script>

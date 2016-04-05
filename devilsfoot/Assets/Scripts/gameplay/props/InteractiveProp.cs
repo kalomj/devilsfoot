@@ -4,14 +4,18 @@ using System.Collections;
 
 public class InteractiveProp : Prop {
 
+    public Text PropTextCopy;
     public Text PropText;
     protected delegate void afterText();
     protected event afterText afterTextEvent;
+    GameObject ui;
 
     bool playing = false;
 
     protected override void Initialize()
     {
+        PropTextCopy = Instantiate(PropText);
+        PropTextCopy.gameObject.transform.SetParent(GameObject.Find("ui").transform,false);
         currentState = propConfig.DefaultState;
     }
 
@@ -24,7 +28,7 @@ public class InteractiveProp : Prop {
 
     private void PlayText()
     {
-        PropText.GetComponent<RectTransform>().position = new Vector3(Input.mousePosition.x+200,Input.mousePosition.y+25);
+        PropTextCopy.GetComponent<RectTransform>().position = new Vector3(Input.mousePosition.x+200,Input.mousePosition.y+25);
 
         if (!playing)
         {
@@ -41,13 +45,16 @@ public class InteractiveProp : Prop {
             yield return new WaitForSeconds(dt.ms / 1000.0f);
         }
         playing = false;
-        afterTextEvent();
+        if (afterTextEvent != null)
+        {
+            afterTextEvent();
+        }
     }
 
     private void displayText(DelayText text)
     {
 
-        PropText.GetComponent<PropTextFade>().SetText(text.text);
+        PropTextCopy.GetComponent<PropTextFade>().SetText(text.text);
 
     }
 

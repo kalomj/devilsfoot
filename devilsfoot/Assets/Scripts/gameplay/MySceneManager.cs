@@ -18,6 +18,8 @@ public class MySceneManager : MonoBehaviour {
     List<Prop> propList;
     List<PropConfig> pnList;
 
+    protected GameManager.Scene nextscene;
+
     void Awake()
     {
         KaloScriptReader ksr = new KaloScriptReader();
@@ -36,10 +38,20 @@ public class MySceneManager : MonoBehaviour {
 
     void Start()
     {
+        Begin();
+    }
+
+    protected virtual void Begin()
+    {
         if (playExposition)
         {
             PlayExposition(expositionProp, expositionPropState);
         }
+    }
+
+    public virtual void Ready()
+    {
+        Begin();
     }
 
     void AssignPropConfig()
@@ -91,7 +103,7 @@ public class MySceneManager : MonoBehaviour {
     {
         if (Input.anyKeyDown && endOfScript)
         {
-            GameManager.Instance.SwitchScene(GameManager.Scene.ch1);
+            GameManager.Instance.SwitchScene(nextscene);
         }
         else if(Input.GetKeyDown(KeyCode.Escape))
         {

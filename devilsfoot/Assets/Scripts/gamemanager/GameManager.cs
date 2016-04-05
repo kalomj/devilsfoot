@@ -6,51 +6,15 @@ using UnityEngine.SceneManagement;
 // This class exists so that global state access from within each scene is centrally controlled.
 public class GameManager : Singleton<GameManager> {
 
-    public bool NoSceneSwitch = true;
+    public bool NoSceneSwitch = false;
     
     public enum Scene {start, prologue, ch1 };
 
-    public static GameManager singleton;
-
-
-#region constructors
+    private static GameManager singleton;
+    
     // This prevents other scripts from creating an instance 
     // of the game manager class with "new GameManager()"
     protected GameManager() { }
-
-    //called before start
-    void Awake()
-    {
-
-    }
-
-    // Use this for initialization
-    void Start()
-    {
-
-    }
-#endregion
-
-#region game loops
-
-
-    // Update is called once per frame
-    void Update () {
-	
-	}
-
-    //called on a reliable timer for things like physics updates
-    void FixedUpdate()
-    {
-
-    }
-
-    //called to process GUI actions independent of the game loop
-    void OnGUI()
-    {
-
-    }
-#endregion
 
     public void DebugMessage(string message)
     {

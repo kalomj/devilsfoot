@@ -1,17 +1,26 @@
 ﻿using UnityEngine;
 
-public class StartSceneManager : MonoBehaviour {
+public class StartSceneManager : MySceneManager {
 
-    public void Start()
+    protected override void Initialize()
     {
-        GameManager.Instance.DebugMessage("Game Manager Called by State Scene Manager.");
+        expositionProp = "start";
+        expositionPropState = "topmenu";
+        nextscene = GameManager.Scene.prologue;
     }
 
-	public void OnGUI()
+    protected override void Begin()
     {
-        if(Input.anyKeyDown)
+        //if prescene is not enabled, then start the scene. otherwise, prescene will start the scene
+        if (GameObject.Find("Prescene") == null)
         {
-            GameManager.Instance.SwitchScene(GameManager.Scene.prologue);
+            base.Begin();
         }
+
+    }
+
+    public override void Ready()
+    {
+        base.Begin();
     }
 }

@@ -4,7 +4,7 @@ using System.Collections;
 
 public class PropTextFade : MonoBehaviour {
 
-    public float rate = .01f;
+    public float rate = .02f;
     Text text;
 
     private bool fadein = true;

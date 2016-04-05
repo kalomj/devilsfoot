@@ -76,6 +76,7 @@
     <Compile Include="Assets\Scripts\gamemanager\KaloScriptReader.cs" />
     <Compile Include="Assets\Scripts\gamemanager\PropConfig.cs" />
     <Compile Include="Assets\Scripts\gameplay\MySceneManager.cs" />
+    <Compile Include="Assets\Scripts\gameplay\PreScene.cs" />
     <Compile Include="Assets\Scripts\gameplay\props\InteractiveProp.cs" />
     <Compile Include="Assets\Scripts\gameplay\props\Prop.cs" />
     <Compile Include="Assets\Scripts\gameplay\props\PropTextFade.cs" />
@@ -83,13 +84,17 @@
     <Compile Include="Assets\Scripts\prologue\Lightning.cs" />
     <Compile Include="Assets\Scripts\prologue\PrologueSceneManager.cs" />
     <Compile Include="Assets\Scripts\prologue\TutorialTextFlash.cs" />
+    <Compile Include="Assets\Scripts\start\LightShow.cs" />
     <Compile Include="Assets\Scripts\start\StartSceneManager.cs" />
+    <Compile Include="Assets\Scripts\start\TextFadeIn.cs" />
+    <Compile Include="Assets\Scripts\utility\LinearSeqGen.cs" />
     <Compile Include="Assets\Scripts\utility\Singleton.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Fonts\IM Fell English SC\OFL.txt" />
     <None Include="Assets\KaloScripts\ch1.xml" />
     <None Include="Assets\KaloScripts\prologue.xml" />
+    <None Include="Assets\KaloScripts\start.xml" />
     <None Include="Assets\Sound\New Text Document.txt" />
     <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
     <None Include="Assets\Standard Assets\ParticleSystems\ParticleSystemsGuidelines.txt" />
