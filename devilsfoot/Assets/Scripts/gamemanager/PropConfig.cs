@@ -9,13 +9,18 @@ using System.Collections.Generic;
 /// 
 /// PropConfig pc = new PropConfig();
 /// 
-/// TODO: replace public nested classes (ugly) with proper interface functions
-/// 
 /// </summary>
 public class PropConfig {
-    public string name { get; set; }
+    private string _name;
+    public string name
+    {
+        get
+        {
+            return _name;
+        }
+    }
 
-    public class global_property
+    private class global_property
     {
         public string name { get; set; }
         public string value { get; set; }
@@ -29,7 +34,7 @@ public class PropConfig {
         }
     }
 
-    public class state
+    private class state
     {
         public string name { get; set; }
 
@@ -92,13 +97,14 @@ public class PropConfig {
         }
     }
 
-    public List<global_property> gpList;
-    public List<state> stateList;
+    private List<global_property> gpList;
+    private List<state> stateList;
 
-    public PropConfig()
+    public PropConfig(string name)
     {
-        gpList = new List<global_property>();
-        stateList = new List<state>();
+        this.gpList = new List<global_property>();
+        this.stateList = new List<state>();
+        this._name = name;
     }
 
     public List<DelayText> textListFromState(string stateName)

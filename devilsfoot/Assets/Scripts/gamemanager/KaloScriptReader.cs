@@ -35,14 +35,14 @@ public class KaloScriptReader {
         {
             if(propNode.Name == "prop")
             {
-                PropConfig pc = new PropConfig();  
+                
                 
                 if(propNode.Attributes["name"] == null)
                 {
                     throw new System.Exception("KaloScript has unnamed prop");
                 }
 
-                pc.name = propNode.Attributes["name"].Value;
+                PropConfig pc = new PropConfig(propNode.Attributes["name"].Value);
                 
                 foreach (XmlNode child in propNode.ChildNodes)
                 {

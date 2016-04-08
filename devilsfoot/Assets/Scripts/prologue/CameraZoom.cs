@@ -6,7 +6,7 @@ public class CameraZoom : MonoBehaviour {
     public float rate = 0.1f;
     public float min = -10.0f;
     public float max = 10.0f;
-    public bool move = true;
+    public bool move = false;
     public float drop_rate = 0f;
     public float tilt_rate = -3.0f;
 

@@ -3,6 +3,32 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
+
+/// <summary>
+/// Base class for managing scenes. All scenes should have a scenemanager derived from 
+/// this class. 
+/// 
+/// Base class provides support for setting up props with their xml configuration
+/// as well as playing exposition text on scene start
+/// 
+/// Derived class should set the next scene property as well as initial exposition prop/state for the scene
+/// 
+/// Base class will not automatically end a scene.
+/// the derived class should set endOfScene flag when it is finished.
+/// 
+/// Awake is called automatically. The base class handles common Awake routines.
+/// Awake calls Initialize. Initialize can be overridden in child classes
+/// Start is then called automatically. The base class handles common Strt routines.
+/// Start calls CheckReady. CheckReady can be overridden in child classes.
+/// CheckReady calls Begin. Begin can be overridden in child classes.
+/// 
+/// Typical flow is to allow the base class to control the scene start. It calls in this order: 
+/// Awake->Initialize->Start->CheckReady->Begin
+/// 
+/// If a scene includes a prescene, the derived scenemanager should override CheckReady to delay Begin
+/// The derived class can then choose when to call Begin
+/// 
+/// </summary>
 public class MySceneManager : MonoBehaviour {
 
     public Text exposition;
@@ -13,10 +39,13 @@ public class MySceneManager : MonoBehaviour {
     public Text speakerNameText;
 
     List<DelayText> expositionText;
-    bool endOfScript = false;
+    protected bool endOfScript = false;
+    protected bool endOfScene = false;
+    protected bool began = false;
 
-    List<Prop> propList;
-    List<PropConfig> pnList;
+    protected List<Prop> propList;
+
+    List<PropConfig> pcList;
 
     protected GameManager.Scene nextscene;
 
@@ -24,7 +53,7 @@ public class MySceneManager : MonoBehaviour {
     {
         KaloScriptReader ksr = new KaloScriptReader();
         ksr.OpenTextAsset(kaloScript);
-        pnList = ksr.ReadProps();
+        pcList = ksr.ReadProps();
 
         AssignPropConfig();
 
@@ -38,22 +67,25 @@ public class MySceneManager : MonoBehaviour {
 
     void Start()
     {
-        Begin();
+        CheckReady();
     }
 
-    protected virtual void Begin()
+    public virtual void Begin()
     {
+        began = true;
         if (playExposition)
         {
             PlayExposition(expositionProp, expositionPropState);
         }
     }
 
-    public virtual void Ready()
+    // Base class assumes we are always ready. Conditions can be added in child classes.
+    public virtual void CheckReady()
     {
         Begin();
     }
 
+    // Loop and assign prop config to all props in the scene
     void AssignPropConfig()
     {
         propList= new List<Prop>(FindObjectsOfType<Prop>());
@@ -64,9 +96,10 @@ public class MySceneManager : MonoBehaviour {
         }
     }
 
+    // Assign propconfig to the given prop
     void AssignPropConfig(Prop prop)
     {
-        foreach (PropConfig pc in pnList)
+        foreach (PropConfig pc in pcList)
         {
             if (prop.name == pc.name)
             {
@@ -82,11 +115,11 @@ public class MySceneManager : MonoBehaviour {
         endOfScript = false;
         expositionText = null;
 
-        foreach (PropConfig pn in pnList)
+        foreach (PropConfig pc in pcList)
         {
-            if (pn.name == pnName)
+            if (pc.name == pnName)
             {
-                expositionText = pn.textListFromState(stateName);
+                expositionText = pc.textListFromState(stateName);
                 break;
             }
         }
@@ -101,13 +134,28 @@ public class MySceneManager : MonoBehaviour {
 
     void Update()
     {
-        if (Input.anyKeyDown && endOfScript)
+        if (endOfScene && Input.anyKeyDown)
         {
-            GameManager.Instance.SwitchScene(nextscene);
+            EndScene();
         }
-        else if(Input.GetKeyDown(KeyCode.Escape))
-        {
 
+        OnUpdate();
+    }
+
+    //This function switches the scene
+    //EndScene behavior can be overridden in derived classes
+    //For example, to provide a fade out before the SwitchScene
+    protected virtual void EndScene()
+    {
+        GameManager.Instance.SwitchScene(nextscene);
+    }
+
+
+    // endOfScene must be set true by the derived class to allow the scene to end.
+    protected virtual void OnUpdate()
+    {
+        if (began && !endOfScript && Input.GetKeyDown(KeyCode.Escape))
+        {
             displayText(expositionText[expositionText.Count - 1]);
             endOfScript = true;
         }
@@ -129,7 +177,7 @@ public class MySceneManager : MonoBehaviour {
         endOfScript = true;
     }
 
-    private void displayText(DelayText text)
+    protected void displayText(DelayText text)
     {
         exposition.text = text.text;
 

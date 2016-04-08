@@ -9,8 +9,6 @@ public class GameManager : Singleton<GameManager> {
     public bool NoSceneSwitch = false;
     
     public enum Scene {start, prologue, ch1 };
-
-    private static GameManager singleton;
     
     // This prevents other scripts from creating an instance 
     // of the game manager class with "new GameManager()"

@@ -88,6 +88,7 @@
     <Compile Include="Assets\Scripts\start\StartSceneManager.cs" />
     <Compile Include="Assets\Scripts\start\TextFadeIn.cs" />
     <Compile Include="Assets\Scripts\utility\LinearSeqGen.cs" />
+    <Compile Include="Assets\Scripts\utility\SeqGen.cs" />
     <Compile Include="Assets\Scripts\utility\Singleton.cs" />
   </ItemGroup>
   <ItemGroup>
