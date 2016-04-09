@@ -4,7 +4,7 @@ using System.Collections;
 
 public class InteractiveProp : Prop {
 
-    public Text PropTextCopy;
+    private Text PropTextCopy;
     public Text PropText;
     protected delegate void afterText();
     protected event afterText afterTextEvent;

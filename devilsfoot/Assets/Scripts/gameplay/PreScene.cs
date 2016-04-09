@@ -23,8 +23,8 @@ public class PreScene : MonoBehaviour {
     FinishedCallBack currentCallBack;
     event FinishedCallBack Finished;
 
-    // Use this for initialization
-    void Start () {
+    void Awake()
+    {
         scenefade = GameObject.Find("scenefade");
         scenepanel = scenefade.GetComponentInChildren<Image>();
         titlefade = GameObject.Find("titlefade");

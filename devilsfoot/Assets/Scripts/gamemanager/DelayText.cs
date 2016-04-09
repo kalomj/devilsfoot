@@ -17,6 +17,18 @@ public class DelayText {
         get; set;
     }
 
+    public string add_item
+    {
+        get; set;
+    }
+
+    public DelayText(string text)
+    {
+        this.text = text;
+        this.ms = 0f;
+        this.speaker = "";
+    }
+
     public DelayText(string text, string ms)
     {
         this.text = text;
@@ -29,5 +41,13 @@ public class DelayText {
         this.text = text;
         this.ms = float.Parse(ms);
         this.speaker = speaker;
+    }
+
+    public DelayText(string text, string ms, string speaker, string add_item)
+    {
+        this.text = text;
+        this.ms = float.Parse(ms);
+        this.speaker = speaker;
+        this.add_item = add_item;
     }
 }

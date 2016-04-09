@@ -60,6 +60,9 @@
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
+    <Reference Include="DOTween">
+      <HintPath>Assets\Demigiant\DOTween\DOTween.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="devilsfoot.CSharp.Plugins.csproj">
@@ -68,6 +71,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Demigiant\DOTween\Examples\Basics.cs" />
+    <Compile Include="Assets\Demigiant\DOTween\Examples\Sequences.cs" />
+    <Compile Include="Assets\Scripts\ch1\ButtonTest.cs" />
     <Compile Include="Assets\Scripts\ch1\Ch1SceneManager.cs" />
     <Compile Include="Assets\Scripts\ch1\Firelight.cs" />
     <Compile Include="Assets\Scripts\ch1\LanternProp.cs" />
@@ -75,15 +81,17 @@
     <Compile Include="Assets\Scripts\gamemanager\GameManager.cs" />
     <Compile Include="Assets\Scripts\gamemanager\KaloScriptReader.cs" />
     <Compile Include="Assets\Scripts\gamemanager\PropConfig.cs" />
+    <Compile Include="Assets\Scripts\gameplay\Inventory\Inventory.cs" />
     <Compile Include="Assets\Scripts\gameplay\MySceneManager.cs" />
     <Compile Include="Assets\Scripts\gameplay\PreScene.cs" />
+    <Compile Include="Assets\Scripts\gameplay\TextFader.cs" />
     <Compile Include="Assets\Scripts\gameplay\props\InteractiveProp.cs" />
+    <Compile Include="Assets\Scripts\gameplay\props\InventoryProp.cs" />
     <Compile Include="Assets\Scripts\gameplay\props\Prop.cs" />
     <Compile Include="Assets\Scripts\gameplay\props\PropTextFade.cs" />
     <Compile Include="Assets\Scripts\prologue\CameraZoom.cs" />
     <Compile Include="Assets\Scripts\prologue\Lightning.cs" />
     <Compile Include="Assets\Scripts\prologue\PrologueSceneManager.cs" />
-    <Compile Include="Assets\Scripts\prologue\TutorialTextFlash.cs" />
     <Compile Include="Assets\Scripts\start\LightShow.cs" />
     <Compile Include="Assets\Scripts\start\StartSceneManager.cs" />
     <Compile Include="Assets\Scripts\start\TextFadeIn.cs" />
@@ -92,6 +100,9 @@
     <Compile Include="Assets\Scripts\utility\Singleton.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Demigiant\DOTween\DOTween.XML" />
+    <None Include="Assets\Demigiant\DOTween\Editor\DOTweenEditor.XML" />
+    <None Include="Assets\Demigiant\DOTween\readme.txt" />
     <None Include="Assets\Fonts\IM Fell English SC\OFL.txt" />
     <None Include="Assets\KaloScripts\ch1.xml" />
     <None Include="Assets\KaloScripts\prologue.xml" />

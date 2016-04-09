@@ -44,6 +44,7 @@ public class PropConfig {
             public string value { get; set; }
             public string hold_ms { get; set; }
             public string pc_name { get; set; }
+            public string add_item { get; set; }
 
             public Dictionary<string, string> attributes;
 
@@ -53,6 +54,15 @@ public class PropConfig {
                 this.value = value;
                 this.hold_ms = hold_ms;
                 this.pc_name = pc_name;
+            }
+
+            public state_property(string name, string value, string hold_ms, string pc_name, string add_item)
+            {
+                this.name = name;
+                this.value = value;
+                this.hold_ms = hold_ms;
+                this.pc_name = pc_name;
+                this.add_item = add_item;
             }
 
             public state_property(string name, string value, string hold_ms)
@@ -131,7 +141,7 @@ public class PropConfig {
         {
             if(sp.name=="text")
             {
-                dtList.Add(new DelayText(sp.value, sp.hold_ms, sp.pc_name));
+                dtList.Add(new DelayText(sp.value, sp.hold_ms, sp.pc_name, sp.add_item));
             }
         }
 
@@ -207,6 +217,11 @@ public class PropConfig {
         if (spAttributes.ContainsKey("pc_name"))
         {
             sp.pc_name = spAttributes["pc_name"];
+        }
+
+        if (spAttributes.ContainsKey("add_item"))
+        {
+            sp.add_item = spAttributes["add_item"];
         }
 
         sp.attributes = spAttributes;

@@ -177,7 +177,7 @@ public class MySceneManager : MonoBehaviour {
         endOfScript = true;
     }
 
-    protected void displayText(DelayText text)
+    protected virtual void displayText(DelayText text)
     {
         exposition.text = text.text;
 
@@ -185,5 +185,17 @@ public class MySceneManager : MonoBehaviour {
         {
             speakerNameText.text = text.speaker;
         }
+    }
+
+    protected Prop GetProp(string name)
+    {
+        foreach(Prop prop in propList)
+        {
+            if (prop.name == name)
+            {
+                return prop;
+            }
+        }
+        throw new System.Exception("Prop name " + name + " not found");
     }
 }

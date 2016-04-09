@@ -20,11 +20,11 @@ public class StartSceneManager : MySceneManager {
         //if prescene is not enabled, then start the scene. otherwise, start the prescene
         if (ps == null)
         {
-            base.Begin();
+            Begin();
         }
         else
         {
-            ps.RunFadeIn(base.Begin);
+            ps.RunFadeIn(Begin);
         }
 
     }
