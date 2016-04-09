@@ -16,6 +16,7 @@ public class PreScene : MonoBehaviour {
     Image titlepanel;
     GameObject titlefade;
     GameObject scenefade;
+    bool running = false;
 
     public delegate void FinishedCallBack();
     //keep one callback at a time. always remove the existing callback before adding
@@ -31,12 +32,21 @@ public class PreScene : MonoBehaviour {
         titlepanel = titlefade.GetComponentInChildren<Image>();
     }
 
-    //Run takes a callback which is invoked after the scene script is complete
+    void Update()
+    {
+        if(Input.GetKeyUp(KeyCode.Escape))
+        {
+            FinishItNow();
+        }
+    }
+
+    //Run takes a callback which is invoked after the prescene fadein script is complete
     public void RunFadeIn(FinishedCallBack callback)
     {
         Finished -= currentCallBack;
         currentCallBack = callback;
         Finished += callback;
+        running = true;
         StartCoroutine("FadeIn");
     }
 
@@ -45,6 +55,7 @@ public class PreScene : MonoBehaviour {
         Finished -= currentCallBack;
         currentCallBack = callback;
         Finished += callback;
+        running = true;
         StartCoroutine("FadeOut");
     }
 
@@ -74,7 +85,7 @@ public class PreScene : MonoBehaviour {
             yield return new WaitForFixedUpdate();
         }
 
-        Finished();
+        FinishItNow();
     }
 
     IEnumerator FadeOut()
@@ -86,6 +97,19 @@ public class PreScene : MonoBehaviour {
             yield return new WaitForFixedUpdate();
         }
 
-        Finished();
+        FinishItNow();
+
+    }
+
+    void FinishItNow()
+    {
+        if (running)
+        {
+            titlefade.SetActive(false);
+            titlepanel.color = new Color(titlepanel.color.r, titlepanel.color.g, titlepanel.color.b, 1.0f);
+            scenepanel.color = new Color(scenepanel.color.r, scenepanel.color.g, scenepanel.color.b, 0.0f);
+            running = false;
+            Finished();
+        }   
     }
 }

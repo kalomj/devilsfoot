@@ -22,6 +22,11 @@ public class DelayText {
         get; set;
     }
 
+    public string remove_item
+    {
+        get; set;
+    }
+
     public DelayText(string text)
     {
         this.text = text;

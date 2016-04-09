@@ -9,7 +9,7 @@ public class InteractiveProp : Prop {
     protected delegate void afterText();
     protected event afterText afterTextEvent;
 
-    bool playing = false;
+    protected bool playing = false;
 
     protected override void Initialize()
     {
@@ -52,9 +52,7 @@ public class InteractiveProp : Prop {
 
     protected virtual void displayText(DelayText text)
     {
-
         PropTextCopy.GetComponent<PropTextFade>().SetText(text.text);
-
     }
 
 }

@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class Ch1SceneManager : MySceneManager {
+public class EstateSceneManager : MySceneManager {
 
     PreScene ps;
     Inventory inventory;
@@ -10,9 +10,9 @@ public class Ch1SceneManager : MySceneManager {
 
     protected override void Initialize()
     {
-        expositionProp = "ch1";
+        expositionProp = "estate";
         expositionPropState = "first_playthrough";
-        nextscene = GameManager.Scene.estate;
+        nextscene = GameManager.Scene.start;
         if (GameObject.Find("Prescene") != null)
         {
             ps = GameObject.Find("Prescene").GetComponent<PreScene>();

@@ -18,6 +18,7 @@ public abstract class Prop : MonoBehaviour {
     [HideInInspector]
     public PropConfig propConfig;
 
+    protected MySceneManager msm;
 
     protected Collider col;
 
@@ -28,6 +29,8 @@ public abstract class Prop : MonoBehaviour {
             col = GetComponent<Collider>();
             col.enabled = false;
         }
+
+        msm = GameObject.FindObjectOfType<MySceneManager>();
     }
 
     void Start()

@@ -77,6 +77,7 @@
     <Compile Include="Assets\Scripts\ch1\Ch1SceneManager.cs" />
     <Compile Include="Assets\Scripts\ch1\Firelight.cs" />
     <Compile Include="Assets\Scripts\ch1\LanternProp.cs" />
+    <Compile Include="Assets\Scripts\estate\EstateSceneManager.cs" />
     <Compile Include="Assets\Scripts\gamemanager\DelayText.cs" />
     <Compile Include="Assets\Scripts\gamemanager\GameManager.cs" />
     <Compile Include="Assets\Scripts\gamemanager\KaloScriptReader.cs" />
@@ -105,6 +106,7 @@
     <None Include="Assets\Demigiant\DOTween\readme.txt" />
     <None Include="Assets\Fonts\IM Fell English SC\OFL.txt" />
     <None Include="Assets\KaloScripts\ch1.xml" />
+    <None Include="Assets\KaloScripts\estate.xml" />
     <None Include="Assets\KaloScripts\prologue.xml" />
     <None Include="Assets\KaloScripts\start.xml" />
     <None Include="Assets\Sound\New Text Document.txt" />

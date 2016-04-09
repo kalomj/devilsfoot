@@ -5,8 +5,8 @@ public class LanternProp : InteractiveProp {
 
     Light myLight;
     Inventory inventory;
-    public InventoryProp contains;
-    public MySceneManager msm;
+    public InventoryProp match;
+
 
     protected override void Initialize()
     {
@@ -15,16 +15,11 @@ public class LanternProp : InteractiveProp {
         myLight.enabled = false;
         afterTextEvent += SwapState;
         inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
-        msm = GameObject.Find("Ch1SceneManager").GetComponent<MySceneManager>(); ;
+        
     }
 
-    protected override void Arrive()
-    {
-        checkPrerequisite();
-        base.Arrive();
-    }
-
-    //this override lets an object trigger item collection during playback
+    //this override lets a prop trigger inventory item collection or removal
+    //during playback of interactive prop text
     protected override void displayText(DelayText text)
     {
         base.displayText(text);
@@ -35,15 +30,31 @@ public class LanternProp : InteractiveProp {
             inventory.AddItem(p);
             inventory.Show();
         }
+
+        if (text.remove_item != null && text.remove_item.Length != 0)
+        {
+            InventoryProp p = msm.GetProp(text.remove_item) as InventoryProp;
+            inventory.RemoveItem(p);
+        }
+    }
+
+    protected override void Arrive()
+    {
+        //check the prerequisite and swap states assuming we aren't talking already
+        if(!playing)
+        {
+            checkPrerequisite();
+        }
+        base.Arrive();
     }
 
     void checkPrerequisite()
     {
-        if (currentState == "cantlight" && inventory.Contains(contains))
+        if (currentState == "cantlight" && inventory.Contains(match))
         {
             currentState = "canlight";
         }
-        else if(currentState == "canlight" && !inventory.Contains(contains))
+        else if(currentState == "canlight" && !inventory.Contains(match))
         {
             currentState = "cantlight";
         }
@@ -51,7 +62,7 @@ public class LanternProp : InteractiveProp {
 
     void SwapState()
     {
-        if(currentState == "lit")
+        if (currentState == "lit")
         {
             currentState = "canlight";
             myLight.enabled = false;
@@ -59,7 +70,6 @@ public class LanternProp : InteractiveProp {
         else if(currentState == "canlight")
         {
             currentState = "lit";
-            inventory.RemoveItem(contains);
             myLight.enabled = true;
         }
     }

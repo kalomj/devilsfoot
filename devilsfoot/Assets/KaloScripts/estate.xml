@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <script>
-	<prop name="ch1">
+	<prop name="estate">
 		<global_property name="type" value="exposition" />
 		
 		<state name="first_playthrough">
-			<state_property name="text" pc_name= "Host" value="Oh Dear!" />
 			<state_property name="text" pc_name= "Host" value="The chimney is blocked from the storm."  />
 			<state_property name="text" pc_name= "Host" value="Here, take this." add_item="match" />
 			<state_property name="text" pc_name= "Host" value="Open the window to clear the air." />

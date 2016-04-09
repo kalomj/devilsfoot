@@ -116,6 +116,7 @@
     <None Include="Assets\Demigiant\DOTween\readme.txt" />
     <None Include="Assets\Fonts\IM Fell English SC\OFL.txt" />
     <None Include="Assets\KaloScripts\ch1.xml" />
+    <None Include="Assets\KaloScripts\estate.xml" />
     <None Include="Assets\KaloScripts\prologue.xml" />
     <None Include="Assets\KaloScripts\start.xml" />
     <None Include="Assets\Sound\New Text Document.txt" />
