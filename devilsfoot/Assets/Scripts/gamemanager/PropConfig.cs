@@ -172,7 +172,7 @@ public class PropConfig {
         {
             if (sp.name == type + "_text")
             {
-                dtList.Add(new DelayText(sp.value, sp.hold_ms, sp.pc_name));
+                dtList.Add(new DelayText(sp.value, sp.hold_ms, sp.pc_name, sp.add_item));
             }
         }
 

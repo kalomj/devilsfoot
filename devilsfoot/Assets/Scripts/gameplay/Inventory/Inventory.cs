@@ -5,20 +5,20 @@ using System.Collections.Generic;
 
 public class Inventory : MonoBehaviour {
 
-    List<Prop> inv;
+    List<InventoryProp> inv;
     TextFader toolTip;
-    Text Item1;
-    Text Item2;
-    Text Item3;
-    Text Item4;
+    GameObject Item1;
+    GameObject Item2;
+    GameObject Item3;
+    GameObject Item4;
 
     public void Awake()
     {
-        inv = new List<Prop>();
-        Item1 = GameObject.Find("Item1").GetComponentInChildren<Text>();
-        Item2 = GameObject.Find("Item2").GetComponentInChildren<Text>();
-        Item3 = GameObject.Find("Item3").GetComponentInChildren<Text>();
-        Item4 = GameObject.Find("Item4").GetComponentInChildren<Text>();
+        inv = new List<InventoryProp>();
+        Item1 = GameObject.Find("Item1");
+        Item2 = GameObject.Find("Item2");
+        Item3 = GameObject.Find("Item3");
+        Item4 = GameObject.Find("Item4");
         toolTip = GameObject.Find("ToolTip").GetComponent<TextFader>();
     }
 
@@ -42,38 +42,38 @@ public class Inventory : MonoBehaviour {
         gameObject.SetActive(true);
     }
 
-    public void AddItem(Prop prop)
+    public void AddItem(InventoryProp prop)
     {
         inv.Add(prop);
-        Item1.text = prop.name;
+        Item1.GetComponent<ButtonTest>().AddItem(prop);
         prop.currentState = "collected";
         toolTip.SetText(prop.name + " added to inventory.");
     }
     
-    public void RemoveItem(Prop prop)
+    public void RemoveItem(InventoryProp prop)
     {
         for(int i = 0; i < inv.Count; i ++)
         {
-            Prop p = inv[i];
+            InventoryProp p = inv[i];
             if(prop.name == p.name)
             {
                 inv.Remove(p);
                 prop.currentState = "owned";
-                Item1.text = "Empty";
+                Item1.GetComponent<ButtonTest>().RemoveItem(prop);
                 toolTip.SetText(prop.name + " removed from inventory.");
                 break;
             }
         }
     }
 
-    public Prop GetItem()
+    public InventoryProp GetItem()
     {
         return inv[0];
     }
 
-    public bool Contains(Prop item)
+    public bool Contains(InventoryProp item)
     {
-        foreach(Prop p in inv)
+        foreach(InventoryProp p in inv)
         {
             if(p.name == item.name)
             {

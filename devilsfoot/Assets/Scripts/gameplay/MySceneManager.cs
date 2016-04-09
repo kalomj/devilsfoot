@@ -187,7 +187,7 @@ public class MySceneManager : MonoBehaviour {
         }
     }
 
-    protected Prop GetProp(string name)
+    public Prop GetProp(string name)
     {
         foreach(Prop prop in propList)
         {

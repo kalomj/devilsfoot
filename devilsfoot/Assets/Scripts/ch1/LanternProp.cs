@@ -5,7 +5,8 @@ public class LanternProp : InteractiveProp {
 
     Light myLight;
     Inventory inventory;
-    public Prop contains;
+    public InventoryProp contains;
+    public MySceneManager msm;
 
     protected override void Initialize()
     {
@@ -14,6 +15,7 @@ public class LanternProp : InteractiveProp {
         myLight.enabled = false;
         afterTextEvent += SwapState;
         inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
+        msm = GameObject.Find("Ch1SceneManager").GetComponent<MySceneManager>(); ;
     }
 
     protected override void Arrive()
@@ -22,11 +24,28 @@ public class LanternProp : InteractiveProp {
         base.Arrive();
     }
 
+    //this override lets an object trigger item collection during playback
+    protected override void displayText(DelayText text)
+    {
+        base.displayText(text);
+
+        if (text.add_item != null && text.add_item.Length != 0)
+        {
+            InventoryProp p = msm.GetProp(text.add_item) as InventoryProp;
+            inventory.AddItem(p);
+            inventory.Show();
+        }
+    }
+
     void checkPrerequisite()
     {
         if (currentState == "cantlight" && inventory.Contains(contains))
         {
             currentState = "canlight";
+        }
+        else if(currentState == "canlight" && !inventory.Contains(contains))
+        {
+            currentState = "cantlight";
         }
     }
 
@@ -35,7 +54,6 @@ public class LanternProp : InteractiveProp {
         if(currentState == "lit")
         {
             currentState = "canlight";
-            inventory.AddItem(contains);
             myLight.enabled = false;
         }
         else if(currentState == "canlight")

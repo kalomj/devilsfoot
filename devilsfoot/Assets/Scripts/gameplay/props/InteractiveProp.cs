@@ -8,7 +8,6 @@ public class InteractiveProp : Prop {
     public Text PropText;
     protected delegate void afterText();
     protected event afterText afterTextEvent;
-    GameObject ui;
 
     bool playing = false;
 
@@ -51,7 +50,7 @@ public class InteractiveProp : Prop {
         }
     }
 
-    private void displayText(DelayText text)
+    protected virtual void displayText(DelayText text)
     {
 
         PropTextCopy.GetComponent<PropTextFade>().SetText(text.text);

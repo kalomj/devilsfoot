@@ -37,7 +37,10 @@ public class Ch1SceneManager : MySceneManager {
 
     public override void Begin()
     {
-        ps.gameObject.SetActive(false);
+        if(ps != null)
+        {
+            ps.gameObject.SetActive(false);
+        }
         base.Begin();
     }
 
@@ -60,13 +63,14 @@ public class Ch1SceneManager : MySceneManager {
         }
     }
 
+    //override display text incase there is an add_item side effect to the exposition
     protected override void displayText(DelayText text)
     {
         base.displayText(text);
 
         if(text.add_item != null && text.add_item.Length != 0)
         {
-            Prop p = GetProp(text.add_item);
+            InventoryProp p = GetProp(text.add_item) as InventoryProp;
             inventory.AddItem(p);
             inventory.Show();
         }

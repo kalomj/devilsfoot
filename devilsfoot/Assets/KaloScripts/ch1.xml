@@ -49,7 +49,7 @@
 		
 		<state name="lit">
 			<state_property name = "interact_text" value="Better save the fuel." />
-			<state_property name = "interact_text" value="Hey, look! A match!" />
+			<state_property name = "interact_text" value="Hey, look! A match!" add_item="match" />
 			<state_property name = "sprite" value="assets\sprites\ch1\lantern" />
 		</state>
 	</prop>
