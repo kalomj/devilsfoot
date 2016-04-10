@@ -6,7 +6,7 @@ public class EstateSceneManager : MySceneManager {
 
     PreScene ps;
     Inventory inventory;
-    
+    public CameraSway cam;
 
     protected override void Initialize()
     {
@@ -19,7 +19,7 @@ public class EstateSceneManager : MySceneManager {
         }
 
         inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
-            
+      
     }
 
     public override void CheckReady()
@@ -27,10 +27,12 @@ public class EstateSceneManager : MySceneManager {
         //if prescene is not enabled, then start the scene. otherwise, start the prescene
         if (ps == null)
         {
+            cam.StartZoom(0);
             Begin();
         }
         else
         {
+            cam.StartZoom(8);
             ps.RunFadeIn(Begin);
         }
     }
@@ -75,7 +77,7 @@ public class EstateSceneManager : MySceneManager {
         {
             InventoryProp p = GetProp(text.add_item) as InventoryProp;
             inventory.AddItem(p);
-            inventory.Show();
+            //inventory.Show();
         }
     }
 

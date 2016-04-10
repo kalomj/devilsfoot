@@ -77,7 +77,9 @@
     <Compile Include="Assets\Scripts\ch1\Ch1SceneManager.cs" />
     <Compile Include="Assets\Scripts\ch1\Firelight.cs" />
     <Compile Include="Assets\Scripts\ch1\LanternProp.cs" />
+    <Compile Include="Assets\Scripts\estate\CameraSway.cs" />
     <Compile Include="Assets\Scripts\estate\EstateSceneManager.cs" />
+    <Compile Include="Assets\Scripts\estate\RoomReflectLight.cs" />
     <Compile Include="Assets\Scripts\gamemanager\DelayText.cs" />
     <Compile Include="Assets\Scripts\gamemanager\GameManager.cs" />
     <Compile Include="Assets\Scripts\gamemanager\KaloScriptReader.cs" />
