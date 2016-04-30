@@ -11,7 +11,7 @@ using System.Collections.Generic;
 /// 
 /// </summary>
 public class PreScene : MonoBehaviour {
-    float rate = 0.005f;
+    public float rate = 0.005f;
     Image scenepanel;
     Image titlepanel;
     GameObject titlefade;

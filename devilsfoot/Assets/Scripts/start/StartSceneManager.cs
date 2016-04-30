@@ -1,8 +1,11 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 public class StartSceneManager : MySceneManager {
 
     PreScene ps;
+    public AudioSource startPiano;
+    public AudioSource fireAudio;
 
     protected override void Initialize()
     {
@@ -13,6 +16,7 @@ public class StartSceneManager : MySceneManager {
         {
             ps = GameObject.Find("Prescene").GetComponent<PreScene>();
         }
+
     }
 
     public override void CheckReady()
@@ -24,9 +28,16 @@ public class StartSceneManager : MySceneManager {
         }
         else
         {
+            fireAudio.Play();
             ps.RunFadeIn(Begin);
         }
 
+    }
+
+    public override void Begin()
+    {
+        exposition.GetComponent<TextFadeIn>().FadeIn();
+        base.Begin();
     }
 
     protected override void OnUpdate()
@@ -48,8 +59,17 @@ public class StartSceneManager : MySceneManager {
         }
         else
         {
-            ps.RunFadeOut(PostEndScene);
+            //fade out the "press start" message for immediate feedback
+            exposition.GetComponent<TextFader>().FadeOut();
+            StartCoroutine("MusicPause");
         }
+    }
+
+    IEnumerator MusicPause()
+    {
+        startPiano.Play();
+        yield return new WaitForSeconds(8);
+        ps.RunFadeOut(PostEndScene);
     }
 
     //callback that switches the scene

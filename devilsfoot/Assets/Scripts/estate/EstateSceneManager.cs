@@ -7,6 +7,7 @@ public class EstateSceneManager : MySceneManager {
     PreScene ps;
     Inventory inventory;
     public CameraSway cam;
+    public Camera ClaraCam;
 
     protected override void Initialize()
     {
@@ -65,6 +66,18 @@ public class EstateSceneManager : MySceneManager {
         else if(Input.GetKeyDown(KeyCode.I))
         {
             inventory.Toggle();
+        }
+        else if(Input.GetKeyDown(KeyCode.F))
+        {
+            GlobalFadeOut();
+        }
+        else if (Input.GetKeyDown(KeyCode.G))
+        {
+            GlobalFadeIn();
+        }
+        else if (Input.GetKeyDown(KeyCode.C))
+        {
+            ClaraCam.enabled = !ClaraCam.enabled;
         }
     }
 

@@ -37,11 +37,14 @@ public class MySceneManager : MonoBehaviour {
     public string expositionPropState;
     public bool playExposition = true;
     public Text speakerNameText;
+    public GameObject FadePanel;
 
     List<DelayText> expositionText;
     protected bool endOfScript = false;
     protected bool endOfScene = false;
     protected bool began = false;
+    protected float fadeRate = 0.004f;
+    protected bool ending = false;
 
     protected List<Prop> propList;
 
@@ -134,12 +137,15 @@ public class MySceneManager : MonoBehaviour {
 
     void Update()
     {
-        if (endOfScene && Input.anyKeyDown)
+        if (!ending && endOfScene && Input.anyKeyDown)
         {
+            ending = true;
             EndScene();
         }
-
-        OnUpdate();
+        else if (!ending)
+        {
+            OnUpdate();
+        }  
     }
 
     //This function switches the scene
@@ -197,5 +203,53 @@ public class MySceneManager : MonoBehaviour {
             }
         }
         throw new System.Exception("Prop name " + name + " not found");
+    }
+
+    public void GlobalFadeIn()
+    {
+        if(FadePanel != null)
+        {
+            StartCoroutine("fadeIn");
+        }
+    }
+
+    IEnumerator fadeIn()
+    {
+        if (FadePanel == null)
+        {
+            yield break;
+        }
+
+        Image panel = FadePanel.GetComponentInChildren<Image>();
+
+        while (panel.color.a >= fadeRate)
+        {
+            panel.color = new Color(panel.color.r, panel.color.g, panel.color.b, panel.color.a - fadeRate);
+            yield return new WaitForFixedUpdate();
+        }
+    }
+
+    public void GlobalFadeOut()
+    {
+        if (FadePanel != null)
+        {
+            StartCoroutine("fadeOut");
+        }
+    }
+
+    IEnumerator fadeOut()
+    {
+        if (FadePanel == null)
+        {
+            yield break;
+        }
+
+        Image panel = FadePanel.GetComponentInChildren<Image>();
+
+        while (panel.color.a <= 1.0f - fadeRate)
+        {
+            panel.color = new Color(panel.color.r, panel.color.g, panel.color.b, panel.color.a + fadeRate*3);
+            yield return new WaitForFixedUpdate();
+        }
     }
 }

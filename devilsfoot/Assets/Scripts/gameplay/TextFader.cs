@@ -20,7 +20,7 @@ public class TextFader : MonoBehaviour {
 
     public void Reset()
     {
-        text.color = new Color(text.color.r, text.color.g, text.color.b, 1.0f);
+        text.color = new Color(text.color.r, text.color.g, text.color.b, 1.1f);
     }
 
     IEnumerator Fade()
