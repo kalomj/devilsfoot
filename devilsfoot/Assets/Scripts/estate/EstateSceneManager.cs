@@ -29,12 +29,12 @@ public class EstateSceneManager : MySceneManager {
         //if prescene is not enabled, then start the scene. otherwise, start the prescene
         if (ps == null)
         {
-            cam.StartZoom(0);
+            Navigator.Teleport(0);
             Begin();
         }
         else
         {
-            cam.StartZoom(8);
+            Navigator.Teleport(0);
             ps.RunFadeIn(Begin);
         }
     }
@@ -80,9 +80,21 @@ public class EstateSceneManager : MySceneManager {
         {
             ClaraCam.enabled = !ClaraCam.enabled;
         }
-        else if (Input.GetKeyDown(KeyCode.K))
+        else if (Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            Navigator.Go(0);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            Navigator.Go(1);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             Navigator.Go(2);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            Navigator.FadeTo(3);
         }
     }
 
