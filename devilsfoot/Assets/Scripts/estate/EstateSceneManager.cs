@@ -8,6 +8,7 @@ public class EstateSceneManager : MySceneManager {
     Inventory inventory;
     public CameraSway cam;
     public Camera ClaraCam;
+    public Navigator Navigator;
 
     protected override void Initialize()
     {
@@ -78,6 +79,10 @@ public class EstateSceneManager : MySceneManager {
         else if (Input.GetKeyDown(KeyCode.C))
         {
             ClaraCam.enabled = !ClaraCam.enabled;
+        }
+        else if (Input.GetKeyDown(KeyCode.K))
+        {
+            Navigator.Go(2);
         }
     }
 
