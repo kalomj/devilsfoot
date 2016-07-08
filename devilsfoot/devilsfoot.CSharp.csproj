@@ -87,6 +87,7 @@
     <Compile Include="Assets\Scripts\ch1\Ch1SceneManager.cs" />
     <Compile Include="Assets\Scripts\ch1\Firelight.cs" />
     <Compile Include="Assets\Scripts\ch1\LanternProp.cs" />
+    <Compile Include="Assets\Scripts\estate\BackButton.cs" />
     <Compile Include="Assets\Scripts\estate\CameraSway.cs" />
     <Compile Include="Assets\Scripts\estate\EstateSceneManager.cs" />
     <Compile Include="Assets\Scripts\estate\RoomReflectLight.cs" />
@@ -97,7 +98,9 @@
     <Compile Include="Assets\Scripts\gameplay\Inventory\Inventory.cs" />
     <Compile Include="Assets\Scripts\gameplay\MySceneManager.cs" />
     <Compile Include="Assets\Scripts\gameplay\Navigator.cs" />
+    <Compile Include="Assets\Scripts\gameplay\NavigatorRule.cs" />
     <Compile Include="Assets\Scripts\gameplay\PreScene.cs" />
+    <Compile Include="Assets\Scripts\gameplay\PropRule.cs" />
     <Compile Include="Assets\Scripts\gameplay\TextFader.cs" />
     <Compile Include="Assets\Scripts\gameplay\props\InteractiveProp.cs" />
     <Compile Include="Assets\Scripts\gameplay\props\InventoryProp.cs" />

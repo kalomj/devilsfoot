@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
 
 public class InteractiveProp : Prop {
 
@@ -8,6 +9,8 @@ public class InteractiveProp : Prop {
     public Text PropText;
     protected delegate void afterText();
     protected event afterText afterTextEvent;
+    public Navigator navigator;
+    public List<NavigatorRule> navigatorRuleList;
 
     protected bool playing = false;
 
@@ -23,6 +26,17 @@ public class InteractiveProp : Prop {
         base.Arrive();
 
         PlayText();
+
+        //when clicked, check all navigation rules
+        //use the first check that passes
+        foreach (NavigatorRule nr in navigatorRuleList)
+        {
+            if(navigator.UseRule(nr))
+            {
+                break;
+            }
+        }
+        
     }
 
     private void PlayText()

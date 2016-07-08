@@ -46,7 +46,7 @@ public class MySceneManager : MonoBehaviour {
     protected float fadeRate = 0.004f;
     protected bool ending = false;
 
-    protected List<Prop> propList;
+    public List<Prop> propList;
 
     List<PropConfig> pcList;
 

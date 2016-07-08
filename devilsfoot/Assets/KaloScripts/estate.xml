@@ -2,6 +2,7 @@
 <script>
 	<prop name="estate">
 		<global_property name="type" value="exposition" />
+		<global_property name="description" value="Scene entrance exposition" />
 		
 		<state name="first_playthrough">
 			<state_property name="text" pc_name= "Host" value="The chimney is blocked from the storm."  />
@@ -28,6 +29,16 @@
 			<state_property name = "interact_text" value="An unlit match." />
 			<state_property name = "interact_text" value="I can light something in here." />
 		</state>
+	</prop>
+	
+	<prop name="chair">
+		<global_property name="description" value="Clare's Chair" />
+		<global_property name="interactive" value="true" />
+		
+		<state name="locked">
+			<state_property name = "interact_text" value="What a beautiful chair." />
+		</state>
+		
 	</prop>
 	
 	<prop name="lantern">

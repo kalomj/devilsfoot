@@ -7,6 +7,16 @@ using System.IO;
 /// <summary>
 /// Read script XML file, construct a list of
 /// PropConfig objects based on the content of the file
+/// 
+/// xml file needs a schema definition
+/// 
+/// roughly defined, there is a top level script tag
+/// that contains a number of prop tags
+/// each of which contains a number of global property tags
+/// as well as state tags
+/// each state tag has statge_property tags
+/// each state_property tag has a dynamic attribute set (whatever goes in the file, goes in the dictionary in this class)
+/// 
 /// </summary>
 public class KaloScriptReader {
 
