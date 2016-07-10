@@ -43,7 +43,7 @@ public class MySceneManager : MonoBehaviour {
     protected bool endOfScript = false;
     protected bool endOfScene = false;
     protected bool began = false;
-    protected float fadeRate = 0.004f;
+    protected float fadeRate = 0.008f;
     protected bool ending = false;
 
     public List<Prop> propList;

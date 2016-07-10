@@ -13,7 +13,7 @@ public class LanternProp : InteractiveProp {
         base.Initialize();
         myLight = GetComponentInChildren<Light>();
         myLight.enabled = false;
-        afterTextEvent += SwapState;
+        //afterTextEvent += SwapState;
         inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
         
     }
@@ -40,12 +40,25 @@ public class LanternProp : InteractiveProp {
 
     protected override void Arrive()
     {
+        
+        //if the positionprop is defined, this is only reachable from one location. If we aren't at that location, then we haven't arrived.
+        if (PositionProp != null)
+        {
+            if (PositionProp.currentState != ReachableFrom)
+            {
+                return;
+            }
+        }
+
+        
         //check the prerequisite and swap states assuming we aren't talking already
-        if(!playing)
+        if (!playing)
         {
             checkPrerequisite();
+            base.Arrive();
+            SwapState();
         }
-        base.Arrive();
+        
     }
 
     void checkPrerequisite()

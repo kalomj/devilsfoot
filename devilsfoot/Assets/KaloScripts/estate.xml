@@ -32,12 +32,68 @@
 	</prop>
 	
 	<prop name="chair">
-		<global_property name="description" value="Clare's Chair" />
+		<global_property name="description" value="Clara's Chair" />
 		<global_property name="interactive" value="true" />
 		
 		<state name="locked">
 			<state_property name = "interact_text" value="What a beautiful chair." />
 		</state>
+		
+	</prop>
+	
+	<prop name="chairedge">
+		<global_property name="description" value="Nav to Clara" />
+		<global_property name="interactive" value="true" />
+		
+		<state name="locked">
+			<state_property name = "interact_text" value="Is that... is someone sitting there?" />
+			<state_property name = "interact_text" value="I need light." />
+		</state>
+		
+	</prop>
+	
+	<prop name="Latch">
+		<global_property name="description" value="Window Latch" />
+		<global_property name="interactive" value="true" />
+		
+		<state name="locked">
+			<state_property name = "interact_text" value="It's locked now." />
+		</state>
+		
+		<state name="unlocked">
+			<state_property name = "interact_text" value="I just unlocked it." />
+		</state>
+		
+	</prop>
+	
+	<prop name="RightPane">
+		<global_property name="description" value="The Window" />
+		<global_property name="interactive" value="true" />
+		
+		<state name="locked">
+			<state_property name = "interact_text" value="I need to open this up, but it's locked." />
+		</state>
+		
+		<state name="open">
+			<state_property name = "interact_text" value="I can breathe much better now." />
+		</state>
+		
+		<state name="toofar">
+			<state_property name = "interact_text" value="I need to get closer" />
+		</state>
+		
+	</prop>
+	
+	<prop name="PositionProp">
+		<global_property name="description" value="Player Current Position" />
+		
+		<state name="0" />
+		<state name="1" />
+		<state name="2" />
+		<state name="3" />
+		<state name="4" />
+		<state name="5" />
+		<state name="6" />
 		
 	</prop>
 	
@@ -71,6 +127,10 @@
 		<state name="burning">
 			<state_property name = "interact_text" value="I'm not going near there." />
 			<state_property name = "interact_text" value="I need to open the window." />
+		</state>
+		
+		<state name="clearing">
+			<state_property name = "interact_text" value="The smoke is clearing up." />
 		</state>
 	</prop>
 	

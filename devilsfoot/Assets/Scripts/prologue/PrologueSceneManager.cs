@@ -14,7 +14,7 @@ public class PrologueSceneManager : MySceneManager {
     {
         expositionProp = "prologue";
         expositionPropState = "first_playthrough";
-        nextscene = GameManager.Scene.ch1;
+        nextscene = GameManager.Scene.estate;
         if (GameObject.Find("Prescene") != null)
         {
             ps = GameObject.Find("Prescene").GetComponent<PreScene>();

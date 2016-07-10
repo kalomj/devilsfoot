@@ -5,47 +5,81 @@ using System.Collections.Generic;
 
 public class InteractiveProp : Prop {
 
-    private Text PropTextCopy;
-    public Text PropText;
+    private Canvas PropTextCopy;
+    public Canvas PropText;
     protected delegate void afterText();
     protected event afterText afterTextEvent;
     public Navigator navigator;
     public List<NavigatorRule> navigatorRuleList;
+    public List<StateRule> stateRuleList;
+    public string ReachableFrom;
+    public InteractiveProp PositionProp;
 
     protected bool playing = false;
 
     protected override void Initialize()
     {
         PropTextCopy = Instantiate(PropText);
-        PropTextCopy.gameObject.transform.SetParent(GameObject.Find("ui").transform,false);
         currentState = propConfig.DefaultState;
     }
 
     protected override void Arrive()
     {
+        //if the positionprop is defined, this is only reachable from one location. If we aren't at that location, then we haven't arrived.
+        if(PositionProp != null)
+        {
+            if (PositionProp.currentState != ReachableFrom)
+            {
+                return;
+            }
+        }
         base.Arrive();
 
-        PlayText();
-
-        //when clicked, check all navigation rules
-        //use the first check that passes
-        foreach (NavigatorRule nr in navigatorRuleList)
+        //update the state first based on the props StateRules
+        foreach (StateRule sr in stateRuleList)
         {
-            if(navigator.UseRule(nr))
+            if (sr.RulesSatisfied())
             {
+                currentState = sr.targetState;
+                if(sr.targetSprite != null)
+                {
+                    this.GetComponent<SpriteRenderer>().sprite = sr.targetSprite;
+                }
+                playing = false;
                 break;
             }
         }
+
+        //when clicked, check all navigation rules
+        //use the first check that passes
+        //if navigation happens, don't play normal inspection text
+        foreach (NavigatorRule nr in navigatorRuleList)
+        {
+            if (navigator.UseRule(nr))
+            {
+                return;
+            }
+        }
+
+        //Play thought bubble text for the props current state
+        PlayText();
+
+
         
     }
 
     private void PlayText()
     {
-        PropTextCopy.GetComponent<RectTransform>().position = new Vector3(Input.mousePosition.x+200,Input.mousePosition.y+25);
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        RaycastHit hit;
+        Physics.Raycast(ray, out hit);
+        
 
         if (!playing)
         {
             playing = true;
+            PropTextCopy.GetComponent<RectTransform>().position = new Vector3(hit.point.x,hit.point.y, hit.point.z-1);
             StartCoroutine("UpdateExposition");
         }
     }

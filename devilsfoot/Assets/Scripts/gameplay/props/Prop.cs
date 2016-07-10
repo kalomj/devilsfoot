@@ -27,7 +27,6 @@ public abstract class Prop : MonoBehaviour {
         if(GetComponent<Collider>() != null)
         {
             col = GetComponent<Collider>();
-            col.enabled = false;
         }
 
         msm = GameObject.FindObjectOfType<MySceneManager>();

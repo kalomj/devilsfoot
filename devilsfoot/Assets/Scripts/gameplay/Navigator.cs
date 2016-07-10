@@ -10,14 +10,39 @@ public class Navigator : MonoBehaviour {
     public List<Camera> Endpoints;
     public Camera MainCamera;
     public MySceneManager SceneManager;
+    public InteractiveProp PositionProp;
 
-    private int current;
+    private int _current;
+
+    private int current
+    {
+        get
+        {
+            return _current;
+        }
+        set
+        {
+            _current = value;
+            PositionProp.currentState = _current.ToString();
+        }
+    }
+    private bool transitioning = false;
+
+    private void SetTransition()
+    {
+        transitioning = true;
+    }
+
+    private void ClearTransition()
+    {
+        transitioning = false;
+    }
 
     public bool UseRule(NavigatorRule nr)
     {
         //look up start and end camera numbers
-        int start = 0;
-        int end = 1;
+        int start = lookupCamera(nr.StartCam);
+        int end = lookupCamera(nr.EndCam);
 
         //rule fails if we aren't at the starting position
         //or if the gamestate is not accurate
@@ -43,26 +68,42 @@ public class Navigator : MonoBehaviour {
         return true;
     }
 
+    private int lookupCamera(Camera cam)
+    {
+        for(int i = 0; i < Endpoints.Count; i++)
+        {
+            //check if they reference the same game object
+            if(cam == Endpoints[i])
+            {
+                return i;
+            }
+        }
+        throw new System.Exception("Camera not found, it should be assigned to the Navigator");
+    }
+
     public void Go(int position)
     {
-        //do nothing if already at the requested position
-        if (atCurrent(position))
+        //do nothing if already at the requested position or transitioning
+        if (atCurrent(position) || transitioning)
         {
             return;
         }
+
+        SetTransition();
 
         current = position;
         //start camera zoom effect
         Transform endpos = Endpoints[position].transform;
         Sequence seq = DOTween.Sequence();
-        seq.Append(MainCamera.transform.DOMove(endpos.position, 5f));
-        seq.Join(MainCamera.transform.DORotate(endpos.rotation.eulerAngles, 5f));
+        seq.Append(MainCamera.transform.DOMove(endpos.position, 1f));
+        seq.Join(MainCamera.transform.DORotate(endpos.rotation.eulerAngles, 1f));
+        seq.AppendCallback(ClearTransition);
     }
 
     public void Teleport(int position)
     {
-        //do nothing if already at the requested position
-        if(atCurrent(position))
+        //do nothing if already at the requested position or transitioning
+        if (atCurrent(position) || transitioning)
         {
             return;
         }
@@ -74,11 +115,13 @@ public class Navigator : MonoBehaviour {
 
     public void FadeTo(int position)
     {
-        //do nothing if already at the requested position
-        if (atCurrent(position))
+        //do nothing if already at the requested position or transitioning
+        if (atCurrent(position) || transitioning)
         {
             return;
         }
+
+        SetTransition();
 
         current = position;
         StartCoroutine("fadeTo");
@@ -86,17 +129,20 @@ public class Navigator : MonoBehaviour {
 
     IEnumerator fadeTo()
     {
-
         Transform endpos = Endpoints[current].transform;
 
         SceneManager.GlobalFadeOut();
 
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(2);
 
         MainCamera.transform.position = new Vector3(endpos.position.x, endpos.position.y, endpos.position.z);
         MainCamera.transform.rotation = new Quaternion(endpos.rotation.x, endpos.rotation.y, endpos.rotation.z, endpos.rotation.w);
 
         SceneManager.GlobalFadeIn();
+
+        yield return new WaitForSeconds(3);
+
+        ClearTransition();
 
     }
 
