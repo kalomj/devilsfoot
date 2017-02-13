@@ -107,6 +107,7 @@
     <Compile Include="Assets\Scripts\gamemanager\GameManager.cs" />
     <Compile Include="Assets\Scripts\gamemanager\KaloScriptReader.cs" />
     <Compile Include="Assets\Scripts\gamemanager\PropConfig.cs" />
+    <Compile Include="Assets\Scripts\gameplay\EscMenu.cs" />
     <Compile Include="Assets\Scripts\gameplay\Inventory\Inventory.cs" />
     <Compile Include="Assets\Scripts\gameplay\MySceneManager.cs" />
     <Compile Include="Assets\Scripts\gameplay\Navigator.cs" />

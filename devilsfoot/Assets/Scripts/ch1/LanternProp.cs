@@ -6,6 +6,7 @@ public class LanternProp : InteractiveProp {
     Light myLight;
     Inventory inventory;
     public InventoryProp match;
+    public GameObject darkness;
 
 
     protected override void Initialize()
@@ -79,11 +80,13 @@ public class LanternProp : InteractiveProp {
         {
             currentState = "canlight";
             myLight.enabled = false;
+            darkness.SetActive(true);
         }
         else if(currentState == "canlight")
         {
             currentState = "lit";
             myLight.enabled = true;
+            darkness.SetActive(false);
         }
     }
 }
