@@ -80,13 +80,28 @@ public class LanternProp : InteractiveProp {
         {
             currentState = "canlight";
             myLight.enabled = false;
-            darkness.SetActive(true);
+            //darkness.SetActive(true);
         }
         else if(currentState == "canlight")
         {
             currentState = "lit";
             myLight.enabled = true;
-            darkness.SetActive(false);
+            StartCoroutine("FadeOutSmoke");
+            //darkness.SetActive(false);
         }
     }
+
+    IEnumerator FadeOutSmoke()
+    {
+        float rate = .005f;
+        Material m = darkness.GetComponent<Renderer>().material;
+        //fade it out
+        while (darkness.GetComponent<Renderer>().material.color.a >= (0.0f + rate))
+        {
+            m.color = new Color(m.color.r, m.color.g, m.color.b, m.color.a - rate);
+            
+            yield return new WaitForFixedUpdate();
+        }
+    }
+    
 }
