@@ -176,6 +176,7 @@
     <None Include="Assets\Demigiant\DOTween\DOTween50.xml" />
     <None Include="Assets\Demigiant\DOTween\Editor\DOTweenEditor.XML" />
     <None Include="Assets\Demigiant\DOTween\readme.txt" />
+    <None Include="Assets\Fonts\IM Fell English SC\OFL 1.txt" />
     <None Include="Assets\Fonts\IM Fell English SC\OFL.txt" />
     <None Include="Assets\KaloScripts\ch1.xml" />
     <None Include="Assets\KaloScripts\estate.xml" />

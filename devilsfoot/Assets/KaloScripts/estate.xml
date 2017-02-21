@@ -8,11 +8,12 @@
 			<state_property name="text" pc_name= "Host" value="The chimney is blocked from the storm."  />
 			<state_property name="text" pc_name= "Host" value="Here, take this." add_item="match" />
 			<state_property name="text" pc_name= "Host" value="Open the window to clear the air." />
-			<state_property name="text" pc_name= "Poe"  value="Certainly!" />
-			<state_property name="text" pc_name= "Poe"  value="I can hardly breathe." />
-			<state_property name="text" pc_name= "Poe"  value="I shall open the window at once." />
-			<state_property name="text" pc_name= "Host" value="I'll send the servant to the roof to clear the chimney." hold_ms="3000" />
+			<state_property name="text" pc_name= "Blackpoole"  value="Certainly!" />
+			<state_property name="text" pc_name= "Blackpoole"  value="I can hardly breathe." />
+			<state_property name="text" pc_name= "Host" value="I'll send the servant to the roof to clear the flue." />
 			<state_property name="text" pc_name= "Host" value="You attend to that window!" />
+			<state_property name="text" pc_name= "Blackpoole"  value="Settle down player." />
+			<state_property name="text" pc_name= "Blackpoole"  value="Hold my beer." />
 			<state_property name="text" value="" />
 		</state>
 	</prop>

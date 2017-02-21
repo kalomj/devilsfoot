@@ -45,6 +45,7 @@ public class MySceneManager : MonoBehaviour {
     protected bool began = false;
     protected float fadeRate = 0.008f;
     protected bool ending = false;
+    protected bool continueFlag = false;
 
     public List<Prop> propList;
 
@@ -132,6 +133,8 @@ public class MySceneManager : MonoBehaviour {
             throw new System.Exception("Exposition Text Is Not Assigned");
         }
 
+        exposition.text = "";
+
         StartCoroutine("UpdateExposition");
     }
 
@@ -141,6 +144,10 @@ public class MySceneManager : MonoBehaviour {
         {
             ending = true;
             EndScene();
+        }
+        else if (Input.GetMouseButtonDown(0))
+        {
+            continueFlag = true;
         }
         else if (!ending)
         {
@@ -171,13 +178,20 @@ public class MySceneManager : MonoBehaviour {
     {
         foreach (DelayText dt in expositionText)
         {
-            if(endOfScript)
+            if (endOfScript)
             {
                 break;
             }
 
+            while (!continueFlag)
+            {
+                yield return new WaitForFixedUpdate();
+            }
+
+            continueFlag = false;
+
             displayText(dt);
-            yield return new WaitForSeconds(dt.ms / 1000.0f);
+            yield return new WaitForFixedUpdate();
         }
 
         endOfScript = true;
