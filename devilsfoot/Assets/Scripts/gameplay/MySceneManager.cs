@@ -38,6 +38,7 @@ public class MySceneManager : MonoBehaviour {
     public bool playExposition = true;
     public Text speakerNameText;
     public GameObject FadePanel;
+    public List<GameObject> Characters;
 
     List<DelayText> expositionText;
     protected bool endOfScript = false;
