@@ -8,7 +8,8 @@ public class EstateSceneManager : MySceneManager {
     Inventory inventory;
     public CameraSway cam;
     public Camera ClaraCam;
-    public Navigator Navigator;
+    
+    
 
     protected override void Initialize()
     {
@@ -35,6 +36,7 @@ public class EstateSceneManager : MySceneManager {
         else
         {
             Navigator.Teleport(0);
+            Navigator.TransitionsDisabled = true;
             ps.RunFadeIn(Begin);
         }
     }
@@ -45,6 +47,10 @@ public class EstateSceneManager : MySceneManager {
         {
             ps.gameObject.SetActive(false);
         }
+        Navigator.TransitionsDisabled = false;
+        Navigator.FadeTo(4);
+        backButton.SetActive(false);
+        
         base.Begin();
     }
 
@@ -54,6 +60,14 @@ public class EstateSceneManager : MySceneManager {
     protected override void OnUpdate()
     {
         base.OnUpdate();
+
+        bool backActive = backButton.activeSelf;
+        if(!backButton.activeSelf && endOfScript)
+        {
+            backButton.SetActive(true);
+            inventory.Hide();
+            Navigator.FadeTo(0);
+        }
 
         if (endOfScript && Input.GetKey(KeyCode.Q) && Input.GetKey(KeyCode.P))
         {
@@ -107,7 +121,7 @@ public class EstateSceneManager : MySceneManager {
         {
             InventoryProp p = GetProp(text.add_item) as InventoryProp;
             inventory.AddItem(p);
-            //inventory.Show();
+            inventory.Show();
         }
     }
 

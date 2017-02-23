@@ -112,6 +112,7 @@
     <Compile Include="Assets\Scripts\gameplay\MySceneManager.cs" />
     <Compile Include="Assets\Scripts\gameplay\Navigator.cs" />
     <Compile Include="Assets\Scripts\gameplay\NavigatorRule.cs" />
+    <Compile Include="Assets\Scripts\gameplay\OpenInventoryOnClick.cs" />
     <Compile Include="Assets\Scripts\gameplay\PreScene.cs" />
     <Compile Include="Assets\Scripts\gameplay\PropRule.cs" />
     <Compile Include="Assets\Scripts\gameplay\RaycastDebugger.cs" />

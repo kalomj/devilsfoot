@@ -42,6 +42,11 @@ public class Inventory : MonoBehaviour {
         gameObject.SetActive(true);
     }
 
+    public void Hide()
+    {
+        gameObject.SetActive(false);
+    }
+
     public void AddItem(InventoryProp prop)
     {
         inv.Add(prop);

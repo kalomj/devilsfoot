@@ -39,6 +39,8 @@ public class MySceneManager : MonoBehaviour {
     public Text speakerNameText;
     public GameObject FadePanel;
     public List<GameObject> Characters;
+    public Navigator Navigator;
+    public GameObject backButton;
 
     List<DelayText> expositionText;
     protected bool endOfScript = false;
@@ -67,11 +69,16 @@ public class MySceneManager : MonoBehaviour {
 
     protected virtual void Initialize()
     {
-        Debug.Log("Empty scenemanager initialization.");
+        ///Debug.Log("Empty scenemanager initialization.");
     }
 
     void Start()
     {
+        foreach(GameObject go in Characters)
+        {
+            go.SetActive(true);
+            go.SetActive(false);
+        }
         CheckReady();
     }
 
@@ -146,7 +153,7 @@ public class MySceneManager : MonoBehaviour {
             ending = true;
             EndScene();
         }
-        else if (Input.GetMouseButtonDown(0))
+        else if ((Input.GetMouseButtonDown(0) && Navigator == null) || (Input.GetMouseButtonDown(0) && !Navigator.Transitioning))
         {
             continueFlag = true;
         }
@@ -192,6 +199,22 @@ public class MySceneManager : MonoBehaviour {
             continueFlag = false;
 
             displayText(dt);
+
+            if (Characters != null)
+            {
+                for (int i = 0; i < Characters.Count; i++)
+                {
+                    if (dt.speaker == Characters[i].name)
+                    {
+                        Characters[i].SetActive(true);
+                    }
+                    else
+                    {
+                        Characters[i].SetActive(false);
+                    }
+                }
+            }
+            
             yield return new WaitForFixedUpdate();
         }
 

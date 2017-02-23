@@ -5,6 +5,7 @@
 		<global_property name="description" value="Scene entrance exposition" />
 		
 		<state name="first_playthrough">
+			<state_property name="text" pc_name= "Blackpoole"  value="Cough...ack....hughhh" />
 			<state_property name="text" pc_name= "Ned" value="Howdy Ho, Good Neighbor!"  />
 			<state_property name="text" pc_name= "Ned" value="The chimney is blocked from the storm."  />
 			<state_property name="text" pc_name= "Ned" value="Here, take this." add_item="match" />
@@ -16,8 +17,13 @@
 			<state_property name="text" pc_name= "Blackpoole"  value="Settle down player." />
 			<state_property name="text" pc_name= "Ned" value="If you can't handle me at my diddliest, then you don't deserve me at my doodliest."  />
 			<state_property name="text" pc_name= "Blackpoole"  value="Hold my beer." />
-			<state_property name="text" value="" />
+			<state_property name="text" pc_name= "" value="" />
 		</state>
+	</prop>
+	
+	<prop name="Ned_Flanders">
+		<global_property name="description" value="Nav to Ned Dialog" />
+		<global_property name="interactive" value="true" />
 	</prop>
 	
 	<prop name="match">

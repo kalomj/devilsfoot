@@ -27,6 +27,25 @@ public class Navigator : MonoBehaviour {
         }
     }
     private bool transitioning = false;
+    public bool Transitioning
+    {
+        get
+        {
+            return transitioning;
+        }
+    }
+    private bool transitionsDisabled = false;
+    public bool TransitionsDisabled
+    {
+        get
+        {
+            return transitionsDisabled;
+        }
+        set
+        {
+            transitionsDisabled = value;
+        }
+    }
 
     private void SetTransition()
     {
@@ -84,7 +103,7 @@ public class Navigator : MonoBehaviour {
     public void Go(int position)
     {
         //do nothing if already at the requested position or transitioning
-        if (atCurrent(position) || transitioning)
+        if (atCurrent(position) || transitioning || transitionsDisabled)
         {
             return;
         }
@@ -103,7 +122,7 @@ public class Navigator : MonoBehaviour {
     public void Teleport(int position)
     {
         //do nothing if already at the requested position or transitioning
-        if (atCurrent(position) || transitioning)
+        if (atCurrent(position) || transitioning || transitionsDisabled)
         {
             return;
         }
@@ -116,7 +135,7 @@ public class Navigator : MonoBehaviour {
     public void FadeTo(int position)
     {
         //do nothing if already at the requested position or transitioning
-        if (atCurrent(position) || transitioning)
+        if (atCurrent(position) || transitioning || transitionsDisabled)
         {
             return;
         }
