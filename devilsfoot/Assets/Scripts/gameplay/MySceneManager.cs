@@ -48,7 +48,7 @@ public class MySceneManager : MonoBehaviour {
     protected bool began = false;
     protected float fadeRate = 0.008f;
     protected bool ending = false;
-    protected bool continueFlag = false;
+    protected bool continueFlag = true;
 
     public List<Prop> propList;
 
@@ -198,8 +198,6 @@ public class MySceneManager : MonoBehaviour {
 
             continueFlag = false;
 
-            displayText(dt);
-
             if (Characters != null)
             {
                 for (int i = 0; i < Characters.Count; i++)
@@ -214,7 +212,19 @@ public class MySceneManager : MonoBehaviour {
                     }
                 }
             }
-            
+
+            do
+            {
+                if(continueFlag)
+                {
+                    continueFlag = false;
+                    dt.speedUp++;
+                }
+                displayText(dt);
+                yield return new WaitForSeconds(dt.delayTime);
+            }
+            while (dt.charsRemaining > 0);
+
             yield return new WaitForFixedUpdate();
         }
 

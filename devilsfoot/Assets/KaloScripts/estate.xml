@@ -22,8 +22,12 @@
 	</prop>
 	
 	<prop name="Ned_Flanders">
-		<global_property name="description" value="Nav to Ned Dialog" />
+		<global_property name="description" value="Neighbor Ned" />
 		<global_property name="interactive" value="true" />
+		
+		<state name="chill">
+			<state_property name = "interact_text" value="Howdy Ho!" />
+		</state>
 	</prop>
 	
 	<prop name="match">

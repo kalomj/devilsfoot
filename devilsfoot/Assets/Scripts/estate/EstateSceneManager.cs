@@ -59,7 +59,7 @@ public class EstateSceneManager : MySceneManager {
     /// </summary>
     protected override void OnUpdate()
     {
-        base.OnUpdate();
+        //base.OnUpdate();
 
         bool backActive = backButton.activeSelf;
         if(!backButton.activeSelf && endOfScript)
@@ -115,6 +115,8 @@ public class EstateSceneManager : MySceneManager {
     //override display text incase there is an add_item side effect to the exposition
     protected override void displayText(DelayText text)
     {
+        text.typeEffect = true;
+
         base.displayText(text);
 
         if(text.add_item != null && text.add_item.Length != 0)
