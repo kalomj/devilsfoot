@@ -72,14 +72,19 @@ public class InteractiveProp : Prop {
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        RaycastHit hit;
-        Physics.Raycast(ray, out hit);
+        //RaycastHit hit;
+        //Physics.Raycast(ray, out hit);
         
 
         if (!playing)
         {
             playing = true;
-            PropTextCopy.GetComponent<RectTransform>().position = new Vector3(hit.point.x,hit.point.y, hit.point.z-1);
+            //PropTextCopy.GetComponentInChildren<Image>().gameObject.GetComponent<RectTransform>().position = new Vector3(hit.point.x,hit.point.y, 0);
+
+            //Get position of text flag container so we can reposition it
+            RectTransform rt = PropTextCopy.GetComponentInChildren<Image>().gameObject.GetComponent<RectTransform>();
+
+           rt.position = new Vector3(Input.mousePosition.x, Input.mousePosition.y+(rt.rect.height/2), Input.mousePosition.z);
             StartCoroutine("UpdateExposition");
         }
     }

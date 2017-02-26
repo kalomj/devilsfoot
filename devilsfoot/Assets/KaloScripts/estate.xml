@@ -5,7 +5,7 @@
 		<global_property name="description" value="Scene entrance exposition" />
 		
 		<state name="first_playthrough">
-			<state_property name="text" pc_name= "Blackpoole"  value="Cough...ack....hughhh" />
+			<state_property name="text" pc_name= "Blackpoole"  value="Cough...ack....hughhh........" />
 			<state_property name="text" pc_name= "Ned" value="Howdy Ho, Good Neighbor!"  />
 			<state_property name="text" pc_name= "Ned" value="The chimney is blocked from the storm."  />
 			<state_property name="text" pc_name= "Ned" value="Here, take this." add_item="match" />

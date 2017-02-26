@@ -19,15 +19,24 @@ public class DelayText {
             if(typeEffect)
             {
                 this.charsRemaining--;
-                this.charsRemaining = this.charsRemaining - speedUp*10;
-                if(this.charsRemaining < 0)
+                this.charsRemaining = this.charsRemaining - this.speedUp*10;
+                if(this.charsRemaining < 0 || this.speedUp > 0)
                 {
                     this.charsRemaining = 0;
+                    this.speedUp = 0;
                 }
-                this.speedUp = 0;
-                if (_text.Substring(_text.Length - this.charsRemaining) == ".")
+
+
+                string curChar = string.Empty;
+
+                if (_text.Length > 0)
                 {
-                    delayTime = 0.2f;
+                    curChar = _text.Substring(_text.Length - this.charsRemaining - 1, 1);
+                }
+
+                if (curChar == "." || curChar == "," || curChar == ";")
+                {
+                    delayTime = 0.25f;
                 }
                 else
                 {
