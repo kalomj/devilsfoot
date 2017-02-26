@@ -160,7 +160,7 @@ public class MySceneManager : MonoBehaviour {
         else if (!ending)
         {
             OnUpdate();
-        }  
+        }
     }
 
     //This function switches the scene
@@ -175,7 +175,23 @@ public class MySceneManager : MonoBehaviour {
     // endOfScene must be set true by the derived class to allow the scene to end.
     protected virtual void OnUpdate()
     {
-        if (began && !endOfScript && Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            GameManager.Instance.SwitchScene(GameManager.Scene.estate);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            GameManager.Instance.SwitchScene(GameManager.Scene.start);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            GameManager.Instance.SwitchScene(GameManager.Scene.prologue);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            GameManager.Instance.SwitchScene(GameManager.Scene.estate);
+        }
+        else if (began && !endOfScript && Input.GetKeyDown(KeyCode.Escape))
         {
             displayText(expositionText[expositionText.Count - 1]);
             endOfScript = true;

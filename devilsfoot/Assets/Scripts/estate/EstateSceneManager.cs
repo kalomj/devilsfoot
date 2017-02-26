@@ -96,19 +96,19 @@ public class EstateSceneManager : MySceneManager {
         }
         else if (Input.GetKeyDown(KeyCode.Alpha0))
         {
-            Navigator.Go(0);
+            GameManager.Instance.SwitchScene(GameManager.Scene.estate);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            Navigator.Go(1);
+            GameManager.Instance.SwitchScene(GameManager.Scene.start);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            Navigator.Go(2);
+            GameManager.Instance.SwitchScene(GameManager.Scene.prologue);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            Navigator.FadeTo(3);
+            GameManager.Instance.SwitchScene(GameManager.Scene.estate);
         }
     }
 
