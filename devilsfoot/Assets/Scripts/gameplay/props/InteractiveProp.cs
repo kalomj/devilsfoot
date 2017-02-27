@@ -21,6 +21,11 @@ public class InteractiveProp : Prop {
     public Vector2 hotSpot = Vector2.zero;
     void OnMouseEnter()
     {
+        setCursorState();
+    }
+
+    private void setCursorState()
+    {
         //if the positionprop is defined, this is only reachable from one location. If we aren't at that location, then we haven't arrived.
         if (PositionProp != null)
         {
@@ -39,7 +44,7 @@ public class InteractiveProp : Prop {
             }
         }
 
-        if(navigable)
+        if (navigable)
         {
             Cursor.SetCursor(cursorNavTexture, hotSpot, cursorMode);
         }
@@ -47,8 +52,8 @@ public class InteractiveProp : Prop {
         {
             Cursor.SetCursor(cursorInspectTexture, hotSpot, cursorMode);
         }
-        
     }
+
     void OnMouseExit()
     {
         Cursor.SetCursor(null, Vector2.zero, cursorMode);
@@ -96,6 +101,7 @@ public class InteractiveProp : Prop {
         {
             if (navigator.UseRule(nr))
             {
+                setCursorState();
                 return;
             }
         }
