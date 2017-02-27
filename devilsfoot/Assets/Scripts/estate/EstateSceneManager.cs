@@ -5,10 +5,9 @@ using System.Collections;
 public class EstateSceneManager : MySceneManager {
 
     PreScene ps;
-    Inventory inventory;
+    
     public CameraSway cam;
     public Camera ClaraCam;
-    
     
 
     protected override void Initialize()
@@ -21,7 +20,7 @@ public class EstateSceneManager : MySceneManager {
             ps = GameObject.Find("Prescene").GetComponent<PreScene>();
         }
 
-        inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
+        
       
     }
 
@@ -49,6 +48,7 @@ public class EstateSceneManager : MySceneManager {
         }
         Navigator.TransitionsDisabled = false;
         Navigator.FadeTo(4);
+        
         backButton.SetActive(false);
         
         base.Begin();
@@ -65,6 +65,7 @@ public class EstateSceneManager : MySceneManager {
         if(!backButton.activeSelf && endOfScript)
         {
             backButton.SetActive(true);
+            displayText(new DelayText(""));
             inventory.Hide();
             Navigator.FadeTo(0);
         }
@@ -119,11 +120,14 @@ public class EstateSceneManager : MySceneManager {
 
         base.displayText(text);
 
-        if(text.add_item != null && text.add_item.Length != 0)
+        if(text.add_item != null && text.add_item.Length != 0 && text.charsRemaining == 0)
         {
             InventoryProp p = GetProp(text.add_item) as InventoryProp;
-            inventory.AddItem(p);
-            inventory.Show();
+            if(!p.collected)
+            {
+                inventory.AddItem(p);
+                inventory.Show();
+            }
         }
     }
 

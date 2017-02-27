@@ -15,15 +15,16 @@ public class Inventory : MonoBehaviour {
     public void Awake()
     {
         inv = new List<InventoryProp>();
+        
+    }
+
+    public void Start()
+    {
         Item1 = GameObject.Find("Item1");
         Item2 = GameObject.Find("Item2");
         Item3 = GameObject.Find("Item3");
         Item4 = GameObject.Find("Item4");
         toolTip = GameObject.Find("ToolTip").GetComponent<TextFader>();
-    }
-
-    public void Start()
-    {
 
         gameObject.SetActive(false);
     }
@@ -49,6 +50,7 @@ public class Inventory : MonoBehaviour {
 
     public void AddItem(InventoryProp prop)
     {
+        prop.collected = true;
         inv.Add(prop);
         Item1.GetComponent<ButtonTest>().AddItem(prop);
         prop.currentState = "collected";
@@ -62,6 +64,7 @@ public class Inventory : MonoBehaviour {
             InventoryProp p = inv[i];
             if(prop.name == p.name)
             {
+                prop.collected = false;
                 inv.Remove(p);
                 prop.currentState = "owned";
                 Item1.GetComponent<ButtonTest>().RemoveItem(prop);

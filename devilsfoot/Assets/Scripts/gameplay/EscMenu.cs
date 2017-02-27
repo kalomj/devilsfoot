@@ -6,13 +6,13 @@ using UnityEngine.SceneManagement;
 public class EscMenu : MonoBehaviour {
 
     public List<GameObject> gameObjects;
-    public bool active;
+    public bool Active;
 
     void Start()
     {
         foreach (GameObject o in gameObjects)
         {
-            setMenuState(active);
+            setMenuState(Active);
         }
     }
 
@@ -20,8 +20,8 @@ public class EscMenu : MonoBehaviour {
 	void Update () {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            active = !active;
-            setMenuState(active);
+            Active = !Active;
+            setMenuState(Active);
         }
 	}
 

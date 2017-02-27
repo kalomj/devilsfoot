@@ -47,6 +47,15 @@ public class Navigator : MonoBehaviour {
         }
     }
 
+    private bool playSuppress = false;
+    public bool PlaySuppress
+    {
+        get
+        {
+            return playSuppress;
+        }
+    }
+
     private void SetTransition()
     {
         transitioning = true;
@@ -130,6 +139,7 @@ public class Navigator : MonoBehaviour {
         current = position;
         Transform endpos = Endpoints[position].transform;
         MainCamera.transform.position = new Vector3(endpos.position.x, endpos.position.y, endpos.position.z);
+        MainCamera.transform.rotation = new Quaternion(endpos.rotation.x, endpos.rotation.y, endpos.rotation.z, endpos.rotation.w);
     }
 
     public void FadeTo(int position)
@@ -141,6 +151,7 @@ public class Navigator : MonoBehaviour {
         }
 
         SetTransition();
+        playSuppress = true;
 
         current = position;
         StartCoroutine("fadeTo");
@@ -158,7 +169,8 @@ public class Navigator : MonoBehaviour {
         MainCamera.transform.rotation = new Quaternion(endpos.rotation.x, endpos.rotation.y, endpos.rotation.z, endpos.rotation.w);
 
         SceneManager.GlobalFadeIn();
-
+        playSuppress = false;
+        
         yield return new WaitForSeconds(3);
 
         ClearTransition();

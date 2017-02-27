@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityStandardAssets.ImageEffects;
 
 public class LanternProp : InteractiveProp {
 
@@ -7,6 +8,7 @@ public class LanternProp : InteractiveProp {
     Inventory inventory;
     public InventoryProp match;
     public GameObject darkness;
+    public GlobalFog gf;
 
 
     protected override void Initialize()
@@ -94,11 +96,16 @@ public class LanternProp : InteractiveProp {
     IEnumerator FadeOutSmoke()
     {
         float rate = .005f;
+        float fog_rate = 0.5f;
         Material m = darkness.GetComponent<Renderer>().material;
         //fade it out
         while (darkness.GetComponent<Renderer>().material.color.a >= (0.0f + rate))
         {
             m.color = new Color(m.color.r, m.color.g, m.color.b, m.color.a - rate);
+            if(gf.heightDensity >=fog_rate)
+            {
+                gf.heightDensity = gf.heightDensity - fog_rate;
+            }
             
             yield return new WaitForFixedUpdate();
         }

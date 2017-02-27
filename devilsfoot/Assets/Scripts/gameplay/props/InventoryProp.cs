@@ -3,15 +3,11 @@ using System.Collections;
 
 public class InventoryProp : Prop {
 
-    Inventory inventory;
-    TextFader toolTip;
+    public Inventory inventory;
+    public TextFader toolTip;
     bool playing = false;
 
-    void Awake()
-    {
-        inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
-        toolTip = GameObject.Find("ToolTip").GetComponent<TextFader>();
-    }
+    public bool collected = false;
 
     protected override void Arrive()
     {

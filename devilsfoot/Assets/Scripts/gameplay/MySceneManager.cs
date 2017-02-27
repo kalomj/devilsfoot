@@ -41,6 +41,8 @@ public class MySceneManager : MonoBehaviour {
     public List<GameObject> Characters;
     public Navigator Navigator;
     public GameObject backButton;
+    public Inventory inventory;
+    public EscMenu escMenu;
 
     List<DelayText> expositionText;
     protected bool endOfScript = false;
@@ -65,6 +67,11 @@ public class MySceneManager : MonoBehaviour {
         AssignPropConfig();
 
         Initialize();
+        if(inventory != null)
+        {
+            inventory.gameObject.SetActive(true);
+        }
+        
     }
 
     protected virtual void Initialize()
@@ -86,7 +93,7 @@ public class MySceneManager : MonoBehaviour {
     {
         began = true;
         if (playExposition)
-        {
+        { 
             PlayExposition(expositionProp, expositionPropState);
         }
     }
@@ -200,6 +207,8 @@ public class MySceneManager : MonoBehaviour {
 
     IEnumerator UpdateExposition()
     {
+        bool last_NagivatorPlaySuppress= false;
+
         foreach (DelayText dt in expositionText)
         {
             if (endOfScript)
@@ -207,10 +216,43 @@ public class MySceneManager : MonoBehaviour {
                 break;
             }
 
-            while (!continueFlag)
+            do
             {
+                //pause typing when inventory opens
+                if (inventory != null && inventory.gameObject.activeSelf)
+                {
+                    yield return new WaitForFixedUpdate();
+                    continueFlag = false;
+                    continue;
+                }
+
+                //pause typing when esc menu opens
+                if (escMenu != null && escMenu.Active)
+                {
+                    yield return new WaitForFixedUpdate();
+                    continueFlag = false;
+                    continue;
+                }
+
+                //pause typing during navigator transitions
+                if (Navigator != null && Navigator.PlaySuppress)
+                {
+                    last_NagivatorPlaySuppress = Navigator.PlaySuppress;
+                    yield return new WaitForFixedUpdate();
+                    continueFlag = false;
+                    continue;
+                }
+
+                //automatically start playing when fade transistioning to dialog camera is complete
+                if(last_NagivatorPlaySuppress && !Navigator.PlaySuppress)
+                {
+                    last_NagivatorPlaySuppress = false;
+                    continueFlag = true;
+                }
+
                 yield return new WaitForFixedUpdate();
             }
+            while (!continueFlag);
 
             continueFlag = false;
 
@@ -231,7 +273,31 @@ public class MySceneManager : MonoBehaviour {
 
             do
             {
-                if(continueFlag)
+                //pause typing when inventory opens
+                if(inventory != null && inventory.gameObject.activeSelf)
+                {
+                    yield return new WaitForFixedUpdate();
+                    continueFlag = false;
+                    continue;
+                }
+
+                //pause typing when esc menu opens
+                if(escMenu != null && escMenu.Active)
+                {
+                    yield return new WaitForFixedUpdate();
+                    continueFlag = false;
+                    continue;
+                }
+
+                //pause typing during navigator transitions
+                if(Navigator != null && Navigator.PlaySuppress)
+                {
+                    yield return new WaitForFixedUpdate();
+                    continueFlag = false;
+                    continue;
+                }
+
+                if (continueFlag)
                 {
                     continueFlag = false;
                     dt.speedUp++;
