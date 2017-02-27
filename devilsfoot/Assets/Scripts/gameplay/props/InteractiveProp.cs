@@ -15,6 +15,45 @@ public class InteractiveProp : Prop {
     public string ReachableFrom;
     public InteractiveProp PositionProp;
 
+    public Texture2D cursorInspectTexture;
+    public Texture2D cursorNavTexture;
+    public CursorMode cursorMode = CursorMode.Auto;
+    public Vector2 hotSpot = Vector2.zero;
+    void OnMouseEnter()
+    {
+        //if the positionprop is defined, this is only reachable from one location. If we aren't at that location, then we haven't arrived.
+        if (PositionProp != null)
+        {
+            if (PositionProp.currentState != ReachableFrom)
+            {
+                return;
+            }
+        }
+
+        bool navigable = false;
+        foreach (NavigatorRule nr in navigatorRuleList)
+        {
+            if (navigator.TestRule(nr))
+            {
+                navigable = true;
+            }
+        }
+
+        if(navigable)
+        {
+            Cursor.SetCursor(cursorNavTexture, hotSpot, cursorMode);
+        }
+        else
+        {
+            Cursor.SetCursor(cursorInspectTexture, hotSpot, cursorMode);
+        }
+        
+    }
+    void OnMouseExit()
+    {
+        Cursor.SetCursor(null, Vector2.zero, cursorMode);
+    }
+
     protected bool playing = false;
 
     protected override void Initialize()

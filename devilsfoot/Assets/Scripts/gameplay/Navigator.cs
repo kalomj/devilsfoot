@@ -66,6 +66,25 @@ public class Navigator : MonoBehaviour {
         transitioning = false;
     }
 
+    public bool TestRule(NavigatorRule nr)
+    {
+
+        //look up start and end camera numbers
+        int start = lookupCamera(nr.StartCam);
+        int end = lookupCamera(nr.EndCam);
+
+        //rule fails if we aren't at the starting position
+        //or if the gamestate is not accurate
+        if (current != start || !nr.RulesSatisfied())
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
     public bool UseRule(NavigatorRule nr)
     {
         //look up start and end camera numbers

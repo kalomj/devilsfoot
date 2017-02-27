@@ -43,6 +43,9 @@ public class MySceneManager : MonoBehaviour {
     public GameObject backButton;
     public Inventory inventory;
     public EscMenu escMenu;
+    public Texture2D cursorTexture;
+    public CursorMode cursorMode = CursorMode.Auto;
+    public Vector2 hotSpot = Vector2.zero;
 
     List<DelayText> expositionText;
     protected bool endOfScript = false;
@@ -81,7 +84,9 @@ public class MySceneManager : MonoBehaviour {
 
     void Start()
     {
-        foreach(GameObject go in Characters)
+        Cursor.SetCursor(cursorTexture, hotSpot, cursorMode);
+
+        foreach (GameObject go in Characters)
         {
             go.SetActive(true);
             go.SetActive(false);
