@@ -119,6 +119,7 @@
     <Compile Include="Assets\Scripts\gameplay\StateRule.cs" />
     <Compile Include="Assets\Scripts\gameplay\TextFader.cs" />
     <Compile Include="Assets\Scripts\gameplay\UI\UINavTarget.cs" />
+    <Compile Include="Assets\Scripts\gameplay\WaitMouseCursor.cs" />
     <Compile Include="Assets\Scripts\gameplay\props\InteractiveProp.cs" />
     <Compile Include="Assets\Scripts\gameplay\props\InventoryProp.cs" />
     <Compile Include="Assets\Scripts\gameplay\props\Prop.cs" />

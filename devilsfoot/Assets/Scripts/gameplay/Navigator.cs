@@ -75,7 +75,7 @@ public class Navigator : MonoBehaviour {
 
         //rule fails if we aren't at the starting position
         //or if the gamestate is not accurate
-        if (current != start || !nr.RulesSatisfied())
+        if (current != start || !nr.RulesSatisfied() || transitioning)
         {
             return false;
         }

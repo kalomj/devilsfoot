@@ -43,9 +43,7 @@ public class MySceneManager : MonoBehaviour {
     public GameObject backButton;
     public Inventory inventory;
     public EscMenu escMenu;
-    public Texture2D cursorTexture;
-    public CursorMode cursorMode = CursorMode.Auto;
-    public Vector2 hotSpot = Vector2.zero;
+    public GameObject clickOverlay;
 
     List<DelayText> expositionText;
     protected bool endOfScript = false;
@@ -54,6 +52,8 @@ public class MySceneManager : MonoBehaviour {
     protected float fadeRate = 0.008f;
     protected bool ending = false;
     protected bool continueFlag = true;
+
+    
 
     public List<Prop> propList;
 
@@ -84,14 +84,34 @@ public class MySceneManager : MonoBehaviour {
 
     void Start()
     {
-        Cursor.SetCursor(cursorTexture, hotSpot, cursorMode);
+        if(clickOverlay != null)
+        {
+            //start with click initialized but not active
+            clickOverlay.SetActive(true);
+            clickOverlay.SetActive(false);
+        }
 
+        
         foreach (GameObject go in Characters)
         {
             go.SetActive(true);
             go.SetActive(false);
         }
+
         CheckReady();
+    }
+
+    public void setClickOverlay(bool state)
+    {
+        bool cur = clickOverlay.activeSelf;
+
+        if(state != cur)
+        {
+            clickOverlay.SetActive(state);
+
+            //reset cursor this frame, allow onmouseover events of other objects to set cursor if needed.
+            Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+        }     
     }
 
     public virtual void Begin()
@@ -160,6 +180,15 @@ public class MySceneManager : MonoBehaviour {
 
     void Update()
     {
+        if(Navigator.Transitioning || escMenu.Active)
+        {
+            setClickOverlay(true);
+        }
+        else
+        {
+            setClickOverlay(false);
+        }
+
         if (!ending && endOfScene && Input.anyKeyDown)
         {
             ending = true;

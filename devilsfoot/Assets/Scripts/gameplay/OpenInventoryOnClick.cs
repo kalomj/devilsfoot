@@ -17,4 +17,5 @@ public class OpenInventoryOnClick : MonoBehaviour {
 	void OnMouseDown() {
         inventory.Toggle();
 	}
+
 }

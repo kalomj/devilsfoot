@@ -17,12 +17,15 @@ public class InteractiveProp : Prop {
 
     public Texture2D cursorInspectTexture;
     public Texture2D cursorNavTexture;
+    //track current texture and only swap if different.
+    private Texture2D cursorCurrentTexture;
     public CursorMode cursorMode = CursorMode.Auto;
     public Vector2 hotSpot = Vector2.zero;
     void OnMouseEnter()
     {
         setCursorState();
     }
+
 
     private void setCursorState()
     {
@@ -46,17 +49,34 @@ public class InteractiveProp : Prop {
 
         if (navigable)
         {
-            Cursor.SetCursor(cursorNavTexture, hotSpot, cursorMode);
+            if(cursorCurrentTexture != cursorNavTexture)
+            {
+                cursorCurrentTexture = cursorNavTexture;
+                Cursor.SetCursor(cursorNavTexture, hotSpot, cursorMode);
+            }
         }
         else
         {
-            Cursor.SetCursor(cursorInspectTexture, hotSpot, cursorMode);
+            if(cursorCurrentTexture != cursorInspectTexture)
+            {
+                cursorCurrentTexture = cursorInspectTexture;
+                Cursor.SetCursor(cursorInspectTexture, hotSpot, cursorMode);
+            }
         }
+    }
+
+    void OnMouseOver()
+    {
+        setCursorState();
     }
 
     void OnMouseExit()
     {
-        Cursor.SetCursor(null, Vector2.zero, cursorMode);
+        if (cursorCurrentTexture != null)
+        {
+            cursorCurrentTexture = null;
+            Cursor.SetCursor(null, Vector2.zero, cursorMode);
+        }
     }
 
     protected bool playing = false;
@@ -79,38 +99,47 @@ public class InteractiveProp : Prop {
         }
         base.Arrive();
 
+        bool stateChanged = false;
         //update the state first based on the props StateRules
         foreach (StateRule sr in stateRuleList)
         {
             if (sr.RulesSatisfied())
             {
-                currentState = sr.targetState;
-                if(sr.targetSprite != null)
+                if (currentState != sr.targetState)
                 {
-                    this.GetComponent<SpriteRenderer>().sprite = sr.targetSprite;
+                    stateChanged = true;
+
+                    currentState = sr.targetState;
+                    if (sr.targetSprite != null)
+                    {
+                        this.GetComponent<SpriteRenderer>().sprite = sr.targetSprite;
+                    }
+                    playing = false;
+
+                    break;
                 }
-                playing = false;
-                break;
             }
         }
 
-        //when clicked, check all navigation rules
-        //use the first check that passes
-        //if navigation happens, don't play normal inspection text
-        foreach (NavigatorRule nr in navigatorRuleList)
+        if(!stateChanged)
         {
-            if (navigator.UseRule(nr))
+            //when clicked, 
+            //if there wasn't a state change,
+            //check all navigation rules
+            //use the first check that passes
+            //if navigation happens, don't play normal inspection text
+            foreach (NavigatorRule nr in navigatorRuleList)
             {
-                setCursorState();
-                return;
+                if (navigator.UseRule(nr))
+                {
+                    return;
+                }
             }
+
         }
 
         //Play thought bubble text for the props current state
-        PlayText();
-
-
-        
+        PlayText();   
     }
 
     private void PlayText()

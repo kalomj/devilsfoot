@@ -28,6 +28,14 @@
 		<state name="chill">
 			<state_property name = "interact_text" value="Howdy Ho!" />
 		</state>
+		
+		<state name="curious">
+			<state_property name = "interact_text" value="What have you seen?!?!" />
+		</state>
+		
+		<state name="flustered">
+			<state_property name = "interact_text" value="Fine, I'll talk." />
+		</state>
 	</prop>
 	
 	<prop name="match">
@@ -112,7 +120,6 @@
 	
 	<prop name="lantern">
 		<global_property name="description" value="Lantern on the mantle" />
-		<global_property name="original_owner" value="FireplaceMantle" />
 		<global_property name="interactive" value="true" />
 		
 		<state name="cantlight">
@@ -149,27 +156,15 @@
 	
 	<prop name="necklace">
 		<global_property name="description" value="The dead woman's necklace" />
-		<global_property name="original_owner" value="dead_woman" />
-		<global_property name="inspectable" value="true" />
-		<global_property name="collectable" value="true" />
+		<global_property name="interactive" value="true" />
 		
-		<global_property name = "icon" value="assets\graphics\ch1\icons\necklace.psd" />
-		
-		<state name="on_woman">
-			<state_property name = "default" value="true" />
-			<state_property name = "interact_text_1" value="It's too good to pass up." />
-			<state_property name = "on_interact" value="state_change" target="collected" />
-			<state_property name = "change_state_sound" value="assets\sound\ch1\necklase_rustle.wav" />
-			<state_property name = "sprite" value="assets\graphics\ch1\sprites\necklace.psd" />
+		<state name="owned">
+			<state_property name = "interact_text" value="It's too good to pass up." />
 		</state>
 		
 		<state name="collected">
-			<state_property name = "owner" value="player" />
-			<state_property name = "description" value="Player has collected the necklace from the body" />
-			<state_property name = "interact_text_1" value="I've seen this somewhere before." hold_ms='500' />
-			<state_property name = "interact_text_2" value="Better keep looking." hold_ms='500' />
-			<state_property name = "interact_sound" value="assets\sound\ch1\necklase_rustle.wav" />
-			<state_property name = "sprite" value="assets\graphics\ch1\sprites\necklace.psd" />
+			<state_property name = "interact_text" value="I've seen this somewhere before."/>
+			<state_property name = "interact_text" value="I should ask around."  />
 		</state>
 	</prop>
 </script>
