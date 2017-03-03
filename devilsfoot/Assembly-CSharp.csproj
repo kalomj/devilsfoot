@@ -60,16 +60,19 @@
      <Compile Include="Assets\Scripts\gamemanager\GameManager.cs" />
      <Compile Include="Assets\Scripts\gamemanager\KaloScriptReader.cs" />
      <Compile Include="Assets\Scripts\gamemanager\PropConfig.cs" />
+     <Compile Include="Assets\Scripts\gameplay\EscMenu.cs" />
      <Compile Include="Assets\Scripts\gameplay\Inventory\Inventory.cs" />
      <Compile Include="Assets\Scripts\gameplay\MySceneManager.cs" />
      <Compile Include="Assets\Scripts\gameplay\Navigator.cs" />
      <Compile Include="Assets\Scripts\gameplay\NavigatorRule.cs" />
+     <Compile Include="Assets\Scripts\gameplay\OpenInventoryOnClick.cs" />
      <Compile Include="Assets\Scripts\gameplay\PreScene.cs" />
      <Compile Include="Assets\Scripts\gameplay\PropRule.cs" />
      <Compile Include="Assets\Scripts\gameplay\RaycastDebugger.cs" />
      <Compile Include="Assets\Scripts\gameplay\StateRule.cs" />
      <Compile Include="Assets\Scripts\gameplay\TextFader.cs" />
      <Compile Include="Assets\Scripts\gameplay\UI\UINavTarget.cs" />
+     <Compile Include="Assets\Scripts\gameplay\WaitMouseCursor.cs" />
      <Compile Include="Assets\Scripts\gameplay\props\InteractiveProp.cs" />
      <Compile Include="Assets\Scripts\gameplay\props\InventoryProp.cs" />
      <Compile Include="Assets\Scripts\gameplay\props\Prop.cs" />
@@ -147,6 +150,7 @@
      <None Include="Assets\Sound\New Text Document.txt" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BrightPassFilter2.shader" />
      <None Include="Assets\Demigiant\DOTween\DOTween43.xml" />
+     <None Include="Assets\Fonts\IM Fell English SC\OFL 1.txt" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_DepthOfField\SeparableBlur.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\MotionBlurClear.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\ColorCorrectionEffect.shader" />

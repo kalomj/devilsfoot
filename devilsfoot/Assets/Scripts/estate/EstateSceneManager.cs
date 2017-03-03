@@ -20,8 +20,6 @@ public class EstateSceneManager : MySceneManager {
             ps = GameObject.Find("Prescene").GetComponent<PreScene>();
         }
 
-        
-      
     }
 
     public override void CheckReady()

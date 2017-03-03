@@ -34,7 +34,14 @@
 		</state>
 		
 		<state name="flustered">
-			<state_property name = "interact_text" value="Fine, I'll talk." />
+			<state_property name="choice" value="Bye." prop="Ned_Flanders" state="curious" />
+			<state_property name="choice" value="What the fuck happened here, bro?" prop="Ned_Flanders" state="talkative" />
+		</state>
+		
+		<state name="talkative">
+			<state_property name="text" pc_name= "Ned" value="Drugs, mostly. Why don't you do you're job, so-called detective, and find some clues. You know, you don't talk like the rest of us. You're not from around here, are you?"  />
+			<state_property name="text" pc_name= "Blackpoole"  value="I smell drugs. BRB." />
+			<state_property name="action" value="state_change" target_prop="Ned_Flanders" target_state="curious" />
 		</state>
 	</prop>
 	

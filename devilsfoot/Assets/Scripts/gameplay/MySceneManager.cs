@@ -113,6 +113,11 @@ public class MySceneManager : MonoBehaviour {
             Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
         }     
     }
+    public void SetPropState(int choice)
+    {
+        //assign prop to state using number assigned to choice button
+        //GetProp(prop).currentState = state;
+    }
 
     public virtual void Begin()
     {
@@ -400,6 +405,7 @@ public class MySceneManager : MonoBehaviour {
             StartCoroutine("fadeOut");
         }
     }
+
 
     IEnumerator fadeOut()
     {
