@@ -11,6 +11,8 @@ public class DelayText {
 
     public float delayTime { get; set; }
 
+    public Dictionary<string, string> attributes = new Dictionary<string, string>();
+
     private string _text;
     public string text
     {
@@ -110,5 +112,15 @@ public class DelayText {
         this.speaker = speaker;
         this.add_item = add_item;
         this.charsRemaining = text.Length;
+    }
+
+    public DelayText(string text, string ms, string speaker, string add_item, Dictionary<string,string> attributes)
+    {
+        this.text = text;
+        this.ms = float.Parse(ms);
+        this.speaker = speaker;
+        this.add_item = add_item;
+        this.charsRemaining = text.Length;
+        this.attributes = attributes;
     }
 }

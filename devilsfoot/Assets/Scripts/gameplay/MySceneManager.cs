@@ -44,6 +44,7 @@ public class MySceneManager : MonoBehaviour {
     public Inventory inventory;
     public EscMenu escMenu;
     public GameObject clickOverlay;
+    public NavigatorRule destination;
 
     List<DelayText> expositionText;
     protected bool endOfScript = false;
@@ -122,6 +123,8 @@ public class MySceneManager : MonoBehaviour {
     public virtual void Begin()
     {
         began = true;
+        continueFlag = false;
+        endOfScript = false;
         if (playExposition)
         { 
             PlayExposition(expositionProp, expositionPropState);

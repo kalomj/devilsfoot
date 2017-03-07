@@ -141,7 +141,7 @@ public class PropConfig {
         {
             if(sp.name=="text")
             {
-                dtList.Add(new DelayText(sp.value, sp.hold_ms, sp.pc_name, sp.add_item));
+                dtList.Add(new DelayText(sp.value, sp.hold_ms, sp.pc_name, sp.add_item, sp.attributes));
             }
         }
 
@@ -172,7 +172,7 @@ public class PropConfig {
         {
             if (sp.name == type + "_text")
             {
-                dtList.Add(new DelayText(sp.value, sp.hold_ms, sp.pc_name, sp.add_item));
+                dtList.Add(new DelayText(sp.value, sp.hold_ms, sp.pc_name, sp.add_item, sp.attributes));
 
                 //check for special "remove_item" attribute, add to delay_text property if exists
                 if(sp.attributes.ContainsKey("remove_item"))

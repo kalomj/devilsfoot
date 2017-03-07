@@ -34,14 +34,26 @@
 		</state>
 		
 		<state name="flustered">
-			<state_property name="choice" value="Bye." prop="Ned_Flanders" state="curious" />
-			<state_property name="choice" value="What the fuck happened here, bro?" prop="Ned_Flanders" state="talkative" />
+			<state_property name = "interact_text" value="Fine, I'll talk." />
+			<state_property name = "text" pc_name= "Blackpoole" value="You know something about this necklace." target_prop="Ned_Flanders" target_state="talkative" choice="1" />
+			<state_property name = "text" pc_name= "Blackpoole" value="Nevermind." target_prop="Ned_Flanders" target_state="chill" choice="2" />
 		</state>
 		
 		<state name="talkative">
-			<state_property name="text" pc_name= "Ned" value="Drugs, mostly. Why don't you do you're job, so-called detective, and find some clues. You know, you don't talk like the rest of us. You're not from around here, are you?"  />
-			<state_property name="text" pc_name= "Blackpoole"  value="I smell drugs. BRB." />
-			<state_property name="action" value="state_change" target_prop="Ned_Flanders" target_state="curious" />
+			<state_property name="text" pc_name= "Blackpoole"  value="Don't go in there, it's gnarly." />
+			<state_property name="text" pc_name= "Ned" value="Oh no! Is everyone OK?"  />
+			<state_property name="text" pc_name= "Blackpoole"  value="Everyone except the crypt keeper over there in the chair." />
+			<state_property name="text" pc_name= "Ned" value="The crypt keeper? You mean Clara?"  />
+			<state_property name="text" pc_name= "Blackpoole"  value="Whatever her name was, she came down with an extremely, extremely fatal case of muscular hypertonicity." />
+			<state_property name="text" pc_name= "Ned"  value="Is....she....." />
+			<state_property name="text" pc_name= "Blackpoole"  value="I've crunched the numbers, and I'm 67.333(repeating of course) percent sure that she ded." />
+			<state_property name="text" pc_name= "Ned"  value="Oh no! Clara!" />
+			<state_property name="text" pc_name= "Ned"  value="(cries like a bitch)" />
+			<state_property name="text" pc_name= "Blackpoole"  value="It is possible that she's still alive in there, completely paralyzed and unable to cry for help." />
+			<state_property name="text" pc_name= "Blackpoole"  value="In which case she could be experiencing some of the most excruciating psychological terror in addition to the likely unbearable physical pain." />
+			<state_property name="text" pc_name= "Ned"  value="(still crying like a bitch)" />
+			<state_property name="text" pc_name= "Blackpoole"  value="Fucking, whatever man. Later." />
+			<state_property name="text" pc_name= "" value="" target_prop="Ned_Flanders" target_state="chill" />
 		</state>
 	</prop>
 	

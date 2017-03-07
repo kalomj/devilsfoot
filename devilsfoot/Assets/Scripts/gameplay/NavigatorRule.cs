@@ -12,6 +12,10 @@ public class NavigatorRule : MonoBehaviour {
     public Navigator.NavType TransitionType;
     public List<PropRule> PropRuleList;
 
+    public GameObject expositionProp;
+    public string expositionPropState;
+    public NavigatorRule expositionDestination;
+
     //check rule list for all applicable prop states
     public bool RulesSatisfied()
     {

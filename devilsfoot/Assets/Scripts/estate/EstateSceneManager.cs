@@ -8,6 +8,7 @@ public class EstateSceneManager : MySceneManager {
     
     public CameraSway cam;
     public Camera ClaraCam;
+
     
 
     protected override void Initialize()
@@ -19,7 +20,6 @@ public class EstateSceneManager : MySceneManager {
         {
             ps = GameObject.Find("Prescene").GetComponent<PreScene>();
         }
-
     }
 
     public override void CheckReady()
@@ -65,7 +65,7 @@ public class EstateSceneManager : MySceneManager {
             backButton.SetActive(true);
             displayText(new DelayText(""));
             inventory.Hide();
-            Navigator.FadeTo(0);
+            Navigator.UseRule(destination);
         }
 
         if (endOfScript && Input.GetKey(KeyCode.Q) && Input.GetKey(KeyCode.P))

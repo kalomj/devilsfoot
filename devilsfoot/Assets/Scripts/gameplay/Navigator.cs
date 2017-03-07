@@ -99,6 +99,16 @@ public class Navigator : MonoBehaviour {
             return false;
         }
 
+        //if expositionprop is set, prepare to play exposition
+        if(nr.expositionProp != null)
+        {
+            SceneManager.expositionProp = nr.expositionProp.name;
+            SceneManager.expositionPropState = nr.expositionPropState;
+            SceneManager.destination = nr.expositionDestination;
+            //start playing now i guess
+            SceneManager.Begin();
+        }
+        
         switch(nr.TransitionType)
         {
             case NavType.Go:
