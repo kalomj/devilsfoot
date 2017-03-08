@@ -45,6 +45,7 @@ public class MySceneManager : MonoBehaviour {
     public EscMenu escMenu;
     public GameObject clickOverlay;
     public NavigatorRule destination;
+    public List<GameObject> choiceButtons;
 
     List<DelayText> expositionText;
     protected bool endOfScript = false;
@@ -251,11 +252,28 @@ public class MySceneManager : MonoBehaviour {
     {
         bool last_NagivatorPlaySuppress= false;
 
-        foreach (DelayText dt in expositionText)
+        for (int j = 0; j < expositionText.Count; j++)
         {
+            DelayText dt = expositionText[j];
+
             if (endOfScript)
             {
                 break;
+            }
+
+            List<DelayText> choices = new List<DelayText>();
+            while (dt.attributes.ContainsKey("choice"))
+            {
+                choices.Add(dt);
+                dt = expositionText[j++];
+            }
+
+            if (choices.Count > 0)
+            {
+                for(int k = 0; k < choices.Count; k++)
+                {
+                    choiceButtons[k].GetComponentInChildren<Text>().text = choices[k].text;
+                }
             }
 
             do
