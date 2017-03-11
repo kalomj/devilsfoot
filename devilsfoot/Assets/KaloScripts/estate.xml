@@ -37,6 +37,7 @@
 			<state_property name = "interact_text" value="Fine, I'll talk." />
 			<state_property name = "text" pc_name= "Blackpoole" value="You know something about this necklace." target_prop="Ned_Flanders" target_state="talkative" choice="1" />
 			<state_property name = "text" pc_name= "Blackpoole" value="Nevermind." target_prop="Ned_Flanders" target_state="chill" choice="2" />
+			<state_property name = "text" pc_name= "Blackpoole" value="" />
 		</state>
 		
 		<state name="talkative">
@@ -54,6 +55,19 @@
 			<state_property name="text" pc_name= "Ned"  value="(still crying like a bitch)" />
 			<state_property name="text" pc_name= "Blackpoole"  value="Fucking, whatever man. Later." />
 			<state_property name="text" pc_name= "" value="" target_prop="Ned_Flanders" target_state="chill" />
+		</state>
+	</prop>
+	
+	<prop name="conversations">
+		<global_property name="description" value="Random conversations" />
+
+		<state name="turning_point">
+			<state_property name = "text" pc_name= "Blackpoole" value="We aren't pursuing a killer any longer." />
+			<state_property name = "text" pc_name= "Watson" value="What exactly do you mean? We haven't found anything conclusive about anything." />
+			<state_property name = "text" pc_name= "Blackpoole" value="This is a hall of mirrors. Every clue we uncover reflects a new path, but it's all an illusion." />
+			<state_property name = "text" pc_name= "Watson" value="With all due respect, Sir. You've gone absolutely mad." />
+			<state_property name = "text" pc_name= "Blackpoole" value="Someone is toying with us." />
+			<state_property name = "text" pc_name= "Blackpoole" value="We aren't pursuing a killer any longer because a killer is pursuing us." />
 		</state>
 	</prop>
 	
