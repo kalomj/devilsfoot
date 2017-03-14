@@ -17,7 +17,7 @@
 			<state_property name="text" pc_name= "Blackpoole"  value="Settle down player." />
 			<state_property name="text" pc_name= "Ned" value="If you can't handle me at my diddliest, then you don't deserve me at my doodliest."  />
 			<state_property name="text" pc_name= "Blackpoole"  value="Hold my beer." />
-			<state_property name="text" pc_name= "" value="" />
+			<state_property name="text" pc_name= "" value="" />   
 		</state>
 	</prop>
 	
@@ -27,7 +27,9 @@
 		
 		<state name="chill">
 			<state_property name = "interact_text" value="Howdy Ho!" />
-		</state>
+      <state_property name = "text" pc_name= "Ned" value="Howdy Ho!" />
+      <state_property name="text" pc_name= "" value="" />
+    </state>
 		
 		<state name="curious">
 			<state_property name = "interact_text" value="What have you seen?!?!" />
@@ -35,8 +37,8 @@
 		
 		<state name="flustered">
 			<state_property name = "interact_text" value="Fine, I'll talk." />
-			<state_property name = "text" pc_name= "Blackpoole" value="You know something about this necklace." target_prop="Ned_Flanders" target_state="talkative" choice="1" />
-			<state_property name = "text" pc_name= "Blackpoole" value="Nevermind." target_prop="Ned_Flanders" target_state="chill" choice="2" />
+			<state_property name = "text" pc_name= "Blackpoole" value="You know something about this necklace." target_prop="Ned_Flanders" target_state="talkative" choice="0" />
+			<state_property name = "text" pc_name= "Blackpoole" value="Nevermind." target_prop="Ned_Flanders" target_state="chill" choice="1" />
 			<state_property name = "text" pc_name= "Blackpoole" value="" />
 		</state>
 		

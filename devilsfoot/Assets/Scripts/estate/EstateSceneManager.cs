@@ -9,12 +9,8 @@ public class EstateSceneManager : MySceneManager {
     public CameraSway cam;
     public Camera ClaraCam;
 
-    
-
     protected override void Initialize()
     {
-        expositionProp = "estate";
-        expositionPropState = "first_playthrough";
         nextscene = GameManager.Scene.start;
         if (GameObject.Find("Prescene") != null)
         {
@@ -58,15 +54,6 @@ public class EstateSceneManager : MySceneManager {
     protected override void OnUpdate()
     {
         //base.OnUpdate();
-
-        bool backActive = backButton.activeSelf;
-        if(!backButton.activeSelf && endOfScript)
-        {
-            backButton.SetActive(true);
-            displayText(new DelayText(""));
-            inventory.Hide();
-            Navigator.UseRule(destination);
-        }
 
         if (endOfScript && Input.GetKey(KeyCode.Q) && Input.GetKey(KeyCode.P))
         {

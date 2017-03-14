@@ -105,6 +105,8 @@ public class Navigator : MonoBehaviour {
             SceneManager.expositionProp = nr.expositionProp.name;
             SceneManager.expositionPropState = nr.expositionPropState;
             SceneManager.destination = nr.expositionDestination;
+
+            SceneManager.backButton.SetActive(false);
             //start playing now i guess
             SceneManager.Begin();
         }
@@ -121,6 +123,8 @@ public class Navigator : MonoBehaviour {
                 FadeTo(end);
                 break;
         }
+
+        
 
         return true;
     }

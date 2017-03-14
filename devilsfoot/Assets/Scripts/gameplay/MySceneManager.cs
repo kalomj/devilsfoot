@@ -46,6 +46,8 @@ public class MySceneManager : MonoBehaviour {
     public GameObject clickOverlay;
     public NavigatorRule destination;
     public List<GameObject> choiceButtons;
+    private List<Prop> choiceProps;
+    private List<string> choiceStates;
 
     List<DelayText> expositionText;
     protected bool endOfScript = false;
@@ -55,13 +57,13 @@ public class MySceneManager : MonoBehaviour {
     protected bool ending = false;
     protected bool continueFlag = true;
 
-    
-
     public List<Prop> propList;
 
     List<PropConfig> pcList;
 
     protected GameManager.Scene nextscene;
+
+    
 
     void Awake()
     {
@@ -76,7 +78,9 @@ public class MySceneManager : MonoBehaviour {
         {
             inventory.gameObject.SetActive(true);
         }
-        
+
+        choiceProps = new List<Prop>();
+        choiceStates = new List<string>();
     }
 
     protected virtual void Initialize()
@@ -93,6 +97,11 @@ public class MySceneManager : MonoBehaviour {
             clickOverlay.SetActive(false);
         }
 
+        foreach (GameObject button in choiceButtons)
+        {
+            button.SetActive(true);
+            button.SetActive(false);
+        }
         
         foreach (GameObject go in Characters)
         {
@@ -115,10 +124,18 @@ public class MySceneManager : MonoBehaviour {
             Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
         }     
     }
+
     public void SetPropState(int choice)
     {
-        //assign prop to state using number assigned to choice button
-        //GetProp(prop).currentState = state;
+        choiceProps[choice].currentState = choiceStates[choice];
+
+        foreach (GameObject button in choiceButtons)
+        {
+            button.SetActive(false);
+        }
+        continueFlag = true;
+
+        PlayExposition(choiceProps[choice].name, choiceStates[choice]);
     }
 
     public virtual void Begin()
@@ -167,6 +184,7 @@ public class MySceneManager : MonoBehaviour {
     {
         endOfScript = false;
         expositionText = null;
+        backButton.SetActive(false);
 
         foreach (PropConfig pc in pcList)
         {
@@ -221,7 +239,6 @@ public class MySceneManager : MonoBehaviour {
         GameManager.Instance.SwitchScene(nextscene);
     }
 
-
     // endOfScene must be set true by the derived class to allow the scene to end.
     protected virtual void OnUpdate()
     {
@@ -251,6 +268,7 @@ public class MySceneManager : MonoBehaviour {
     IEnumerator UpdateExposition()
     {
         bool last_NagivatorPlaySuppress= false;
+        bool choiceFlag = false;
 
         for (int j = 0; j < expositionText.Count; j++)
         {
@@ -262,18 +280,21 @@ public class MySceneManager : MonoBehaviour {
             }
 
             List<DelayText> choices = new List<DelayText>();
+            choiceProps.Clear();
+            choiceStates.Clear();
             while (dt.attributes.ContainsKey("choice"))
             {
+                choiceFlag = true;
                 choices.Add(dt);
-                dt = expositionText[j++];
+                choiceProps.Add(GetProp(dt.attributes["target_prop"]));
+                choiceStates.Add(dt.attributes["target_state"]);
+                dt = expositionText[++j];
             }
 
-            if (choices.Count > 0)
+            for(int k = 0; k < choices.Count; k++)
             {
-                for(int k = 0; k < choices.Count; k++)
-                {
-                    choiceButtons[k].GetComponentInChildren<Text>().text = choices[k].text;
-                }
+                choiceButtons[k].SetActive(true);
+                choiceButtons[k].GetComponentInChildren<Text>().text = choices[k].text;
             }
 
             do
@@ -371,6 +392,14 @@ public class MySceneManager : MonoBehaviour {
         }
 
         endOfScript = true;
+
+        if (!choiceFlag)
+        {
+            backButton.SetActive(true);
+        }
+        displayText(new DelayText(""));
+        inventory.Hide();
+        Navigator.UseRule(destination);
     }
 
     protected virtual void displayText(DelayText text)
@@ -426,7 +455,6 @@ public class MySceneManager : MonoBehaviour {
             StartCoroutine("fadeOut");
         }
     }
-
 
     IEnumerator fadeOut()
     {
