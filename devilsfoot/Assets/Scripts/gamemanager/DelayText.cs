@@ -36,13 +36,22 @@ public class DelayText {
                     curChar = _text.Substring(_text.Length - this.charsRemaining - 1, 1);
                 }
 
-                if (curChar == "." || curChar == "," || curChar == ";")
+                if (curChar == "." || curChar == "," || curChar == ";" || curChar == "?" || curChar == "!")
                 {
                     delayTime = 0.25f;
                 }
-                else
+                else if (curChar == "|")
                 {
                     delayTime = 0.1f;
+                    return "";
+                }
+                else if (curChar == " ")
+                {
+                    delayTime = 0.1f;
+                }
+                else
+                {
+                    delayTime = delayTime * 0.9f;
                 }
 
                 return _text.Substring(0, _text.Length - this.charsRemaining);
@@ -87,6 +96,7 @@ public class DelayText {
         this.ms = 0f;
         this.speaker = "";
         this.charsRemaining = text.Length;
+        this.delayTime = 0.1f;
     }
 
     public DelayText(string text, string ms)
@@ -95,6 +105,7 @@ public class DelayText {
         this.ms = float.Parse(ms);
         this.speaker = "";
         this.charsRemaining = text.Length;
+        this.delayTime = 0.1f;
     }
 
     public DelayText(string text, string ms, string speaker)
@@ -103,6 +114,7 @@ public class DelayText {
         this.ms = float.Parse(ms);
         this.speaker = speaker;
         this.charsRemaining = text.Length;
+        this.delayTime = 0.1f;
     }
 
     public DelayText(string text, string ms, string speaker, string add_item)
@@ -112,6 +124,7 @@ public class DelayText {
         this.speaker = speaker;
         this.add_item = add_item;
         this.charsRemaining = text.Length;
+        this.delayTime = 0.1f;
     }
 
     public DelayText(string text, string ms, string speaker, string add_item, Dictionary<string,string> attributes)
@@ -122,5 +135,6 @@ public class DelayText {
         this.add_item = add_item;
         this.charsRemaining = text.Length;
         this.attributes = attributes;
+        this.delayTime = 0.1f;
     }
 }

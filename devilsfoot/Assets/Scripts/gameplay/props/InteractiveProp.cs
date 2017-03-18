@@ -169,6 +169,12 @@ public class InteractiveProp : Prop {
         {
             displayText(dt);
             yield return new WaitForSeconds(dt.ms / 1000.0f);
+
+            //break out of loop if player is going quickly and starts to navigate before the exposition is complete
+            if(navigator != null && navigator.Transitioning)
+            {
+                break;
+            }
         }
         playing = false;
         if (afterTextEvent != null)

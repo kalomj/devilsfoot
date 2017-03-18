@@ -5,6 +5,8 @@ using System.Collections;
 public class PropTextFade : MonoBehaviour {
 
     public float rate = .02f;
+    public Navigator navigator;
+
     Text text;
     Image image;
     RectTransform rt;
@@ -28,6 +30,14 @@ public class PropTextFade : MonoBehaviour {
     // FixedUpdate is called on regular intervals
     void FixedUpdate()
     {
+        if(navigator.Transitioning)
+        {
+            fadein = false;
+            text.color = new Color(text.color.r, text.color.g, text.color.b, 0.0f);
+            image.color = new Color(image.color.r, image.color.g, image.color.b, 0.0f);
+            return;
+        }
+
         if (fadein && text.color.a < 1.0f)
         {
             rt.position = new Vector3(rt.position.x + moveConst1, rt.position.y + moveConst2, rt.position.z);

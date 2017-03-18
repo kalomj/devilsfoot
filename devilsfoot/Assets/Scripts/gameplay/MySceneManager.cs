@@ -92,9 +92,8 @@ public class MySceneManager : MonoBehaviour {
     {
         if(clickOverlay != null)
         {
-            //start with click initialized but not active
+            //start with click initialized
             clickOverlay.SetActive(true);
-            clickOverlay.SetActive(false);
         }
 
         foreach (GameObject button in choiceButtons)
@@ -114,6 +113,11 @@ public class MySceneManager : MonoBehaviour {
 
     public void setClickOverlay(bool state)
     {
+        if(clickOverlay == null)
+        {
+            return;
+        }
+
         bool cur = clickOverlay.activeSelf;
 
         if(state != cur)
@@ -136,6 +140,12 @@ public class MySceneManager : MonoBehaviour {
         continueFlag = true;
 
         PlayExposition(choiceProps[choice].name, choiceStates[choice]);
+    }
+
+    public void SetPropState(string propName, string state)
+    {
+        Prop p = GetProp(propName);
+        p.currentState = state;
     }
 
     public virtual void Begin()
@@ -184,7 +194,11 @@ public class MySceneManager : MonoBehaviour {
     {
         endOfScript = false;
         expositionText = null;
-        backButton.SetActive(false);
+
+        if (backButton != null)
+        {
+            backButton.SetActive(false);
+        }
 
         foreach (PropConfig pc in pcList)
         {
@@ -207,7 +221,7 @@ public class MySceneManager : MonoBehaviour {
 
     void Update()
     {
-        if(Navigator.Transitioning || escMenu.Active)
+        if(!began || (Navigator != null && Navigator.Transitioning) || (escMenu != null && escMenu.Active))
         {
             setClickOverlay(true);
         }
@@ -291,12 +305,6 @@ public class MySceneManager : MonoBehaviour {
                 dt = expositionText[++j];
             }
 
-            for(int k = 0; k < choices.Count; k++)
-            {
-                choiceButtons[k].SetActive(true);
-                choiceButtons[k].GetComponentInChildren<Text>().text = choices[k].text;
-            }
-
             do
             {
                 //pause typing when inventory opens
@@ -352,6 +360,12 @@ public class MySceneManager : MonoBehaviour {
                 }
             }
 
+            for (int k = 0; k < choices.Count; k++)
+            {
+                choiceButtons[k].SetActive(true);
+                choiceButtons[k].GetComponentInChildren<Text>().text = choices[k].text;
+            }
+
             do
             {
                 //pause typing when inventory opens
@@ -393,13 +407,22 @@ public class MySceneManager : MonoBehaviour {
 
         endOfScript = true;
 
-        if (!choiceFlag)
+        if (!choiceFlag && backButton != null)
         {
             backButton.SetActive(true);
         }
         displayText(new DelayText(""));
-        inventory.Hide();
-        Navigator.UseRule(destination);
+
+        if(inventory != null)
+        {
+            inventory.Hide();
+        }
+        
+        if(Navigator != null)
+        {
+            Navigator.UseRule(destination);
+        }
+        
     }
 
     protected virtual void displayText(DelayText text)
@@ -409,6 +432,11 @@ public class MySceneManager : MonoBehaviour {
         if(speakerNameText != null)
         {
             speakerNameText.text = text.speaker;
+        }
+
+        if(text.attributes != null && text.attributes.ContainsKey("target_prop") && text.attributes.ContainsKey("target_state"))
+        {
+            SetPropState(text.attributes["target_prop"], text.attributes["target_state"]);
         }
     }
 
