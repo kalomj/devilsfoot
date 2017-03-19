@@ -48,6 +48,8 @@ public class MySceneManager : MonoBehaviour {
     public List<GameObject> choiceButtons;
     private List<Prop> choiceProps;
     private List<string> choiceStates;
+    public List<AudioSource> typeSounds;
+    public AudioSource crumpleSound;
 
     List<DelayText> expositionText;
     protected bool endOfScript = false;
@@ -360,6 +362,8 @@ public class MySceneManager : MonoBehaviour {
                 }
             }
 
+            crumpleSound.Play();
+
             for (int k = 0; k < choices.Count; k++)
             {
                 choiceButtons[k].SetActive(true);
@@ -437,6 +441,35 @@ public class MySceneManager : MonoBehaviour {
         if(text.attributes != null && text.attributes.ContainsKey("target_prop") && text.attributes.ContainsKey("target_state"))
         {
             SetPropState(text.attributes["target_prop"], text.attributes["target_state"]);
+        }
+
+        if(typeSounds != null && typeSounds.Count >= 2)
+        {
+            System.Random r = new System.Random();
+
+            bool sound_playing = false;
+            foreach(AudioSource sound in typeSounds)
+            {
+                if(sound.isPlaying)
+                {
+                    sound_playing = true;
+                }
+            }
+
+
+            if(!sound_playing)
+            {
+                if(r.Next(3) == 1)
+                {
+
+                    typeSounds[r.Next(2,typeSounds.Count)].Play();
+                }
+                else
+                {
+                    typeSounds[0].Play();
+                }
+                
+            }
         }
     }
 

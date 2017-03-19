@@ -109,6 +109,8 @@ public class InteractiveProp : Prop {
                 {
                     stateChanged = true;
 
+                    sr.PlayStateChangeAudio();
+
                     currentState = sr.targetState;
                     if (sr.targetSprite != null)
                     {
@@ -138,7 +140,7 @@ public class InteractiveProp : Prop {
 
         }
 
-        //Play thought bubble text for the props current state
+        //Play thought bubble text for the prop's current state
         PlayText();   
     }
 
@@ -153,12 +155,11 @@ public class InteractiveProp : Prop {
         if (!playing)
         {
             playing = true;
-            //PropTextCopy.GetComponentInChildren<Image>().gameObject.GetComponent<RectTransform>().position = new Vector3(hit.point.x,hit.point.y, 0);
 
             //Get position of text flag container so we can reposition it
             RectTransform rt = PropTextCopy.GetComponentInChildren<Image>().gameObject.GetComponent<RectTransform>();
 
-           rt.position = new Vector3(Input.mousePosition.x, Input.mousePosition.y+(rt.rect.height/2), Input.mousePosition.z);
+            rt.position = new Vector3(Input.mousePosition.x, Input.mousePosition.y+(rt.rect.height/2), Input.mousePosition.z);
             StartCoroutine("UpdateExposition");
         }
     }

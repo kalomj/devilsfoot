@@ -12,6 +12,7 @@ public class StateRule : MonoBehaviour {
     public List<PropRule> PropRuleList;
     public string targetState;
     public Sprite targetSprite;
+    public AudioSource stateChangeAudio;
 
     //check rule list for all applicable prop states
     public bool RulesSatisfied()
@@ -23,5 +24,13 @@ public class StateRule : MonoBehaviour {
         }
 
         return answer;
+    }
+
+    public void PlayStateChangeAudio()
+    {
+        if(stateChangeAudio != null)
+        {
+            stateChangeAudio.Play();
+        }
     }
 }
