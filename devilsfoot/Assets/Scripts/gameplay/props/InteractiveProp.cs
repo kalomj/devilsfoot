@@ -41,7 +41,7 @@ public class InteractiveProp : Prop {
         bool navigable = false;
         foreach (NavigatorRule nr in navigatorRuleList)
         {
-            if (navigator.TestRule(nr))
+            if (navigator.TestRule(nr) && !navigator.TransitionsDisabled)
             {
                 navigable = true;
             }

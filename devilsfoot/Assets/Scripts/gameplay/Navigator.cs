@@ -106,7 +106,8 @@ public class Navigator : MonoBehaviour {
             SceneManager.expositionPropState = nr.expositionPropState;
             SceneManager.destination = nr.expositionDestination;
 
-            SceneManager.backButton.SetActive(false);
+            //SceneManager.backButton.SetActive(false);
+            TransitionsDisabled = true;
             //start playing now i guess
             SceneManager.Begin();
         }

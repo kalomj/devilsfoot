@@ -42,8 +42,9 @@ public class EstateSceneManager : MySceneManager {
         }
         Navigator.TransitionsDisabled = false;
         Navigator.FadeTo(4);
-        
-        backButton.SetActive(false);
+
+        //backButton.SetActive(false);
+        Navigator.TransitionsDisabled = true;
         
         base.Begin();
     }

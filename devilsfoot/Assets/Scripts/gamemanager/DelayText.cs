@@ -21,7 +21,6 @@ public class DelayText {
             if(typeEffect)
             {
                 this.charsRemaining--;
-                this.charsRemaining = this.charsRemaining - this.speedUp*10;
                 if(this.charsRemaining < 0 || this.speedUp > 0)
                 {
                     this.charsRemaining = 0;

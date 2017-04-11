@@ -65,8 +65,6 @@ public class MySceneManager : MonoBehaviour {
 
     protected GameManager.Scene nextscene;
 
-    
-
     void Awake()
     {
         KaloScriptReader ksr = new KaloScriptReader();
@@ -197,10 +195,7 @@ public class MySceneManager : MonoBehaviour {
         endOfScript = false;
         expositionText = null;
 
-        if (backButton != null)
-        {
-            backButton.SetActive(false);
-        }
+        Navigator.TransitionsDisabled = true;
 
         foreach (PropConfig pc in pcList)
         {
@@ -362,7 +357,9 @@ public class MySceneManager : MonoBehaviour {
                 }
             }
 
-            crumpleSound.Play();
+            System.Random r = new System.Random();
+            if(r.Next(4) == 1)
+                crumpleSound.Play();
 
             for (int k = 0; k < choices.Count; k++)
             {
@@ -406,14 +403,23 @@ public class MySceneManager : MonoBehaviour {
             }
             while (dt.charsRemaining > 0);
 
+            foreach (AudioSource sound in typeSounds)
+            {
+                if (sound.isPlaying)
+                {
+                    sound.Stop();
+                }
+            }
+
             yield return new WaitForFixedUpdate();
         }
 
         endOfScript = true;
 
-        if (!choiceFlag && backButton != null)
+        if (!choiceFlag)
         {
-            backButton.SetActive(true);
+            //backButton.SetActive(true);
+            Navigator.TransitionsDisabled = false;
         }
         displayText(new DelayText(""));
 
@@ -443,7 +449,7 @@ public class MySceneManager : MonoBehaviour {
             SetPropState(text.attributes["target_prop"], text.attributes["target_state"]);
         }
 
-        if(typeSounds != null && typeSounds.Count >= 2)
+        if(typeSounds != null && typeSounds.Count >= 2 && text.charsRemaining > 0)
         {
             System.Random r = new System.Random();
 
@@ -459,16 +465,7 @@ public class MySceneManager : MonoBehaviour {
 
             if(!sound_playing)
             {
-                if(r.Next(3) == 1)
-                {
-
-                    typeSounds[r.Next(2,typeSounds.Count)].Play();
-                }
-                else
-                {
-                    typeSounds[0].Play();
-                }
-                
+               typeSounds[r.Next(0,typeSounds.Count)].Play();
             }
         }
     }
